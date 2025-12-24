@@ -59,6 +59,9 @@ steps:
           --version-suffix -pkg-latest \
           --skip-wip \
           --login --push
+        # TODO: Remove these alias commands once the source build (:latest) is fixed and no longer WIP
+        doas podman tag ghcr.io/daemonless/jellyfin:pkg-latest ghcr.io/daemonless/jellyfin:latest
+        doas podman push ghcr.io/daemonless/jellyfin:latest
 
 when:
   - event: push
