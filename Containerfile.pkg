@@ -2,7 +2,7 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-LABEL org.opencontainers.image.title="jellyfin" \
+LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.description="The Free Software Media System on FreeBSD (Package)" \
       org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
       org.opencontainers.image.url="https://jellyfin.org/" \

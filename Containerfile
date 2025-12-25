@@ -51,7 +51,7 @@ ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="ffmpeg fontconfig freetype2 mediainfo libskiasharp"
 
 LABEL io.daemonless.wip="true" \
-    org.opencontainers.image.title="jellyfin" \
+    org.opencontainers.image.title="Jellyfin" \
     org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
     org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
     org.opencontainers.image.url="https://jellyfin.org/" \
