@@ -6,11 +6,11 @@ LABEL org.freebsd.jail.allow.mlock="required"
 # Install build dependencies
 RUN pkg update && \
     pkg install -y \
-        dotnet \
-        node22 \
-        npm-node22 \
-        python311 \
-        git-lite
+    dotnet \
+    node22 \
+    npm-node22 \
+    python311 \
+    git-lite
 
 # Fetch latest version and clone Jellyfin
 RUN VERSION=$(fetch -qo - "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p') && \
@@ -48,27 +48,29 @@ RUN mkdir -p /app/jellyfin-web && \
 FROM ghcr.io/daemonless/arr-base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
+ARG PACKAGES="ffmpeg fontconfig freetype2 mediainfo libskiasharp"
+
 LABEL io.daemonless.wip="true" \
-      org.opencontainers.image.title="jellyfin" \
-      org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
-      org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
-      org.opencontainers.image.url="https://jellyfin.org/" \
-      org.opencontainers.image.documentation="https://jellyfin.org/docs/" \
-      org.opencontainers.image.licenses="GPL-2.0-only" \
-      org.opencontainers.image.vendor="daemonless" \
-      org.opencontainers.image.authors="daemonless" \
-      io.daemonless.port="8096" \
-      io.daemonless.arch="${FREEBSD_ARCH}" \
-      org.freebsd.jail.allow.mlock="required"
+    org.opencontainers.image.title="jellyfin" \
+    org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
+    org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
+    org.opencontainers.image.url="https://jellyfin.org/" \
+    org.opencontainers.image.documentation="https://jellyfin.org/docs/" \
+    org.opencontainers.image.licenses="GPL-2.0-only" \
+    org.opencontainers.image.vendor="daemonless" \
+    org.opencontainers.image.authors="daemonless" \
+    io.daemonless.port="8096" \
+    io.daemonless.arch="${FREEBSD_ARCH}" \
+    org.freebsd.jail.allow.mlock="required" \
+    io.daemonless.category="Media Servers" \
+    io.daemonless.upstream-mode="github" \
+    io.daemonless.upstream-repo="jellyfin/jellyfin" \
+    io.daemonless.packages="${PACKAGES}"
 
 # Runtime dependencies (ffmpeg, graphics, and mediainfo)
 RUN pkg update && \
     pkg install -y \
-        ffmpeg \
-        fontconfig \
-        freetype2 \
-        mediainfo \
-        libskiasharp && \
+    ${PACKAGES} && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
