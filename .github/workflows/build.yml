@@ -55,7 +55,7 @@ jobs:
 
             # Now build container image with pre-built artifacts
             echo "==> Building container image..."
-            doas podman build -f Containerfile -t ${{ env.IMAGE_NAME }}:latest .
+            doas podman build --network host -f Containerfile -t ${{ env.IMAGE_NAME }}:latest .
 
             # Extract version for tagging
             VERSION=$(cat build-output/version)
@@ -109,13 +109,13 @@ jobs:
 
             # Build :pkg (quarterly packages)
             echo "==> Building :pkg variant..."
-            doas podman build -f Containerfile.pkg \
+            doas podman build --network host -f Containerfile.pkg \
               --build-arg BASE_VERSION=15-quarterly \
               -t ${{ env.IMAGE_NAME }}:pkg .
 
             # Build :pkg-latest (latest packages)
             echo "==> Building :pkg-latest variant..."
-            doas podman build -f Containerfile.pkg \
+            doas podman build --network host -f Containerfile.pkg \
               --build-arg BASE_VERSION=15 \
               -t ${{ env.IMAGE_NAME }}:pkg-latest .
 
