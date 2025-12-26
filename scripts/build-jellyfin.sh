@@ -4,10 +4,13 @@
 
 set -e
 
+# Capture repo root at script start (before any cd commands)
+REPO_ROOT="$PWD"
 BUILD_DIR="${BUILD_DIR:-/tmp/jellyfin-build}"
-# Use absolute path for OUTPUT_DIR since we cd during build
-SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-OUTPUT_DIR="${OUTPUT_DIR:-${SCRIPT_DIR}/build-output}"
+OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/build-output}"
+
+echo "==> Script running from: ${REPO_ROOT}"
+echo "==> Output will be saved to: ${OUTPUT_DIR}"
 
 echo "==> Updating package repos..."
 pkg update -f
