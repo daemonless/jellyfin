@@ -1,29 +1,10 @@
 # Woodpecker CI configuration
 # Fetches centralized build script from daemonless/daemonless
+#
+# NOTE: Only builds :pkg variants here. The :latest source build requires
+# bare metal (allow.mlock for .NET) and is handled by GitHub Actions.
 
 steps:
-  - name: build-latest
-    image: /bin/sh
-    environment:
-      GITHUB_TOKEN:
-        from_secret: GITHUB_TOKEN
-      GITHUB_ACTOR:
-        from_secret: GITHUB_USER
-    commands:
-      - |
-        mkdir -p scripts
-        fetch -qo scripts/build.sh \
-          "https://raw.githubusercontent.com/daemonless/daemonless/build-v1.0.0/scripts/build.sh"
-        chmod +x scripts/build.sh
-        ./scripts/build.sh \
-          --doas \
-          --registry ghcr.io \
-          --image ghcr.io/daemonless/jellyfin \
-          --tag latest \
-          --tag-version \
-          --skip-wip \
-          --login --push
-
   - name: build-pkg
     image: /bin/sh
     environment:
@@ -59,7 +40,8 @@ steps:
           --version-suffix -pkg-latest \
           --skip-wip \
           --login --push
-        # TODO: Remove these alias commands once the source build (:latest) is fixed and no longer WIP
+        # Tag pkg-latest as :latest for Woodpecker builds
+        # (Source build :latest is handled by GitHub Actions)
         doas podman tag ghcr.io/daemonless/jellyfin:pkg-latest ghcr.io/daemonless/jellyfin:latest
         doas podman push ghcr.io/daemonless/jellyfin:latest
 
