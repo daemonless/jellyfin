@@ -44,7 +44,7 @@ jobs:
             # Get egress interface
             EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
             sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
-            service pf start
+            service pf onestart
           run: |
             set -e
 
@@ -103,7 +103,7 @@ jobs:
             # Get egress interface
             EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
             sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
-            service pf start
+            service pf onestart
           run: |
             set -e
 
