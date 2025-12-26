@@ -16,16 +16,16 @@ echo "==> Updating package repos..."
 pkg update -f
 
 echo "==> Installing build dependencies..."
-pkg install -y dotnet node22 npm-node22 python311 git-lite
+pkg install -y dotnet node22 npm-node22 python311 git-lite curl
 
 echo "==> Fetching latest Jellyfin version..."
 # Use GITHUB_TOKEN if available to avoid rate limiting
 if [ -n "${GITHUB_TOKEN}" ]; then
-    VERSION=$(fetch -qo - --header "Authorization: token ${GITHUB_TOKEN}" \
+    VERSION=$(curl -sL -H "Authorization: token ${GITHUB_TOKEN}" \
         "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | \
         sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
 else
-    VERSION=$(fetch -qo - "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | \
+    VERSION=$(curl -sL "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | \
         sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
 fi
 
