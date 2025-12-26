@@ -33,8 +33,14 @@ jobs:
           usesh: true
           copyback: false
           sync: rsync
+          mem: 8192
           envs: "GITHUB_TOKEN GITHUB_ACTOR"
           prepare: |
+            # Enable swap for memory-intensive webpack build
+            dd if=/dev/zero of=/swapfile bs=1m count=4096
+            chmod 0600 /swapfile
+            mdconfig -a -t vnode -f /swapfile -u 0
+            swapon /dev/md0
             pkg install -y podman doas
             echo "permit nopass keepenv :wheel" > /usr/local/etc/doas.conf
             # Setup networking for podman
