@@ -19,7 +19,20 @@ echo "==> Installing build dependencies..."
 pkg install -y dotnet node22 npm-node22 python311 git-lite
 
 echo "==> Fetching latest Jellyfin version..."
-VERSION=$(fetch -qo - "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+# Use GITHUB_TOKEN if available to avoid rate limiting
+if [ -n "${GITHUB_TOKEN}" ]; then
+    VERSION=$(fetch -qo - --header "Authorization: token ${GITHUB_TOKEN}" \
+        "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | \
+        sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+else
+    VERSION=$(fetch -qo - "https://api.github.com/repos/jellyfin/jellyfin/releases/latest" | \
+        sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+fi
+
+if [ -z "${VERSION}" ]; then
+    echo "ERROR: Failed to fetch Jellyfin version from GitHub API"
+    exit 1
+fi
 echo "Building Jellyfin ${VERSION}"
 
 echo "==> Cloning repositories..."
