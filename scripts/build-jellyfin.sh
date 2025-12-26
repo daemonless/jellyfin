@@ -5,7 +5,9 @@
 set -e
 
 BUILD_DIR="${BUILD_DIR:-/tmp/jellyfin-build}"
-OUTPUT_DIR="${OUTPUT_DIR:-./build-output}"
+# Use absolute path for OUTPUT_DIR since we cd during build
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+OUTPUT_DIR="${OUTPUT_DIR:-${SCRIPT_DIR}/build-output}"
 
 echo "==> Updating package repos..."
 pkg update -f
@@ -54,6 +56,7 @@ cp -r "${BUILD_DIR}/jellyfin-web/dist/"* "${BUILD_DIR}/app/jellyfin-web/"
 
 # Free disk space - remove source directories and caches
 echo "==> Cleaning up build directories..."
+cd /tmp  # Exit build dir before deleting it
 rm -rf "${BUILD_DIR}/jellyfin" "${BUILD_DIR}/jellyfin-web"
 rm -rf ~/.nuget ~/.dotnet/sdk-manifests ~/.local/share/NuGet 2>/dev/null || true
 dotnet nuget locals all --clear 2>/dev/null || true
