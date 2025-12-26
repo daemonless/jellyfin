@@ -1,11 +1,8 @@
 # Woodpecker CI configuration
-# Fetches centralized build script from daemonless/daemonless
-#
-# NOTE: Only builds :pkg variants here. The :latest source build requires
-# bare metal (allow.mlock for .NET) and is handled by GitHub Actions.
+# Builds jellyfin from source on bare metal (requires allow.mlock for .NET)
 
 steps:
-  - name: build-pkg
+  - name: build-latest
     image: /bin/sh
     environment:
       GITHUB_TOKEN:
@@ -14,36 +11,23 @@ steps:
         from_secret: GITHUB_USER
     commands:
       - |
+        # Build Jellyfin from source (requires bare metal for .NET mlock)
+        chmod +x scripts/build-jellyfin.sh
+        doas ./scripts/build-jellyfin.sh
+
+        # Build container image with pre-built artifacts
         mkdir -p scripts
         fetch -qo scripts/build.sh \
           "https://raw.githubusercontent.com/daemonless/daemonless/build-v1.0.0/scripts/build.sh"
         chmod +x scripts/build.sh
-        # Build :pkg (quarterly packages)
         ./scripts/build.sh \
           --doas \
           --registry ghcr.io \
           --image ghcr.io/daemonless/jellyfin \
-          --containerfile Containerfile.pkg \
-          --base-version 15-quarterly \
-          --tag pkg \
-          --version-suffix -pkg \
+          --tag latest \
+          --tag-version \
           --skip-wip \
           --login --push
-        # Build :pkg-latest (latest packages)
-        ./scripts/build.sh \
-          --doas \
-          --registry ghcr.io \
-          --image ghcr.io/daemonless/jellyfin \
-          --containerfile Containerfile.pkg \
-          --base-version 15 \
-          --tag pkg-latest \
-          --version-suffix -pkg-latest \
-          --skip-wip \
-          --login --push
-        # Tag pkg-latest as :latest for Woodpecker builds
-        # (Source build :latest is handled by GitHub Actions)
-        doas podman tag ghcr.io/daemonless/jellyfin:pkg-latest ghcr.io/daemonless/jellyfin:latest
-        doas podman push ghcr.io/daemonless/jellyfin:latest
 
 when:
   - event: push
