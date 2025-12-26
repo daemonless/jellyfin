@@ -37,8 +37,14 @@ jobs:
           prepare: |
             pkg install -y podman doas
             echo "permit nopass keepenv :wheel" > /usr/local/etc/doas.conf
+            # Setup networking for podman
             kldload pf
             sysctl net.inet.ip.forwarding=1
+            cp /usr/local/etc/containers/pf.conf.sample /etc/pf.conf
+            # Get egress interface
+            EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
+            sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
+            service pf start
           run: |
             set -e
 
@@ -90,8 +96,14 @@ jobs:
           prepare: |
             pkg install -y podman doas
             echo "permit nopass keepenv :wheel" > /usr/local/etc/doas.conf
+            # Setup networking for podman
             kldload pf
             sysctl net.inet.ip.forwarding=1
+            cp /usr/local/etc/containers/pf.conf.sample /etc/pf.conf
+            # Get egress interface
+            EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
+            sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
+            service pf start
           run: |
             set -e
 
