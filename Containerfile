@@ -4,7 +4,7 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/arr-base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-ARG PACKAGES="dotnet ffmpeg fontconfig freetype2 mediainfo libskiasharp"
+ARG PACKAGES="ffmpeg fontconfig freetype2 mediainfo libskiasharp"
 
 LABEL org.opencontainers.image.title="Jellyfin" \
     org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
