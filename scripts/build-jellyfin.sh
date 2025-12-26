@@ -7,6 +7,9 @@ set -e
 BUILD_DIR="${BUILD_DIR:-/tmp/jellyfin-build}"
 OUTPUT_DIR="${OUTPUT_DIR:-./build-output}"
 
+echo "==> Updating package repos..."
+pkg update -f
+
 echo "==> Installing build dependencies..."
 pkg install -y dotnet node22 npm-node22 python311 git-lite
 
