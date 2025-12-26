@@ -41,9 +41,8 @@ export COMPlus_EnableWriteXorExecute=0
 dotnet publish Jellyfin.Server \
     --configuration Release \
     --output "${BUILD_DIR}/app" \
-    --self-contained \
-    --runtime freebsd-x64 \
-    "-p:DebugSymbols=false;DebugType=none;UseAppHost=true;PublishReadyToRun=false;Parallel=false"
+    --no-self-contained \
+    "-p:DebugSymbols=false;DebugType=none;UseAppHost=false;PublishReadyToRun=false;Parallel=false"
 
 echo "==> Combining web and server..."
 mkdir -p "${BUILD_DIR}/app/jellyfin-web"

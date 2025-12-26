@@ -1,6 +1,6 @@
 #!/usr/local/bin/execlineb -P
 /usr/local/bin/s6-setuidgid bsd
-/usr/local/jellyfin/jellyfin
+/usr/local/bin/dotnet /usr/local/jellyfin/Jellyfin.Server.dll
     --datadir /config
     --cachedir /cache
     --ffmpeg /usr/local/bin/ffmpeg
