@@ -31,6 +31,10 @@ sed -i '' 's/"engines": {/"_engines": {/' package.json
 npm install --ignore-engines
 npm run build:production
 
+# Free disk space - remove node_modules after build
+echo "==> Cleaning up jellyfin-web build artifacts..."
+rm -rf "${BUILD_DIR}/jellyfin-web/node_modules"
+
 echo "==> Building Jellyfin Server..."
 cd "${BUILD_DIR}/jellyfin"
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -47,6 +51,12 @@ dotnet publish Jellyfin.Server \
 echo "==> Combining web and server..."
 mkdir -p "${BUILD_DIR}/app/jellyfin-web"
 cp -r "${BUILD_DIR}/jellyfin-web/dist/"* "${BUILD_DIR}/app/jellyfin-web/"
+
+# Free disk space - remove source directories and caches
+echo "==> Cleaning up build directories..."
+rm -rf "${BUILD_DIR}/jellyfin" "${BUILD_DIR}/jellyfin-web"
+rm -rf ~/.nuget ~/.dotnet/sdk-manifests ~/.local/share/NuGet 2>/dev/null || true
+dotnet nuget locals all --clear 2>/dev/null || true
 
 echo "==> Copying to output directory..."
 rm -rf "${OUTPUT_DIR}"

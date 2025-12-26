@@ -53,6 +53,12 @@ jobs:
             chmod +x scripts/build-jellyfin.sh
             ./scripts/build-jellyfin.sh
 
+            # Clean up to free disk space before container build
+            echo "==> Freeing disk space..."
+            pkg clean -ay
+            rm -rf /var/cache/pkg/* /tmp/jellyfin-build 2>/dev/null || true
+            df -h
+
             # Now build container image with pre-built artifacts
             echo "==> Building container image..."
             doas podman build --network host -f Containerfile -t ${{ env.IMAGE_NAME }}:latest .
