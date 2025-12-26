@@ -1,8 +1,8 @@
 # Woodpecker CI configuration
-# Builds jellyfin from source on bare metal (requires allow.mlock for .NET)
+# NOTE: :latest currently aliases to :pkg-latest until source build is fixed
 
 steps:
-  - name: build-latest
+  - name: build-pkg-latest
     image: /bin/sh
     environment:
       GITHUB_TOKEN:
@@ -11,21 +11,20 @@ steps:
         from_secret: GITHUB_USER
     commands:
       - |
-        # Build Jellyfin from source (requires bare metal for .NET mlock)
-        chmod +x scripts/build-jellyfin.sh
-        doas ./scripts/build-jellyfin.sh
-
-        # Build container image with pre-built artifacts
         mkdir -p scripts
         fetch -qo scripts/build.sh \
           "https://raw.githubusercontent.com/daemonless/daemonless/build-v1.0.0/scripts/build.sh"
         chmod +x scripts/build.sh
+
+        # Build pkg-latest and also tag as latest
         ./scripts/build.sh \
           --doas \
           --registry ghcr.io \
           --image ghcr.io/daemonless/jellyfin \
+          --containerfile Containerfile.pkg \
+          --pkg-repo latest \
+          --tag pkg-latest \
           --tag latest \
-          --tag-version \
           --skip-wip \
           --login --push
 

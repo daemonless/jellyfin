@@ -1,5 +1,7 @@
 name: Build FreeBSD Container
 
+# NOTE: :latest currently aliases to :pkg-latest until source build is fixed
+
 on:
   push:
     branches: [main]
@@ -13,77 +15,6 @@ env:
   IMAGE_NAME: ghcr.io/daemonless/jellyfin
 
 jobs:
-  build-latest:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Build in FreeBSD VM
-        uses: vmactions/freebsd-vm@v1.3.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-        with:
-          release: "15.0"
-          usesh: true
-          copyback: false
-          sync: rsync
-          mem: 8192
-          envs: "GITHUB_TOKEN GITHUB_ACTOR"
-          prepare: |
-            # Enable swap for memory-intensive webpack build
-            dd if=/dev/zero of=/swapfile bs=1m count=4096
-            chmod 0600 /swapfile
-            mdconfig -a -t vnode -f /swapfile -u 0
-            swapon /dev/md0
-            pkg install -y podman doas
-            echo "permit nopass keepenv :wheel" > /usr/local/etc/doas.conf
-            # Setup networking for podman
-            kldload pf
-            sysctl net.inet.ip.forwarding=1
-            cp /usr/local/etc/containers/pf.conf.sample /etc/pf.conf
-            # Get egress interface
-            EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
-            sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
-            service pf onestart
-          run: |
-            set -e
-
-            # Build Jellyfin on bare metal (not in jail) - .NET requires allow.mlock
-            echo "==> Building Jellyfin on bare metal..."
-            chmod +x scripts/build-jellyfin.sh
-            ./scripts/build-jellyfin.sh
-
-            # Clean up to free disk space before container build
-            echo "==> Freeing disk space..."
-            pkg clean -ay
-            rm -rf /var/cache/pkg/* /tmp/jellyfin-build 2>/dev/null || true
-            df -h
-
-            # Now build container image with pre-built artifacts
-            echo "==> Building container image..."
-            doas podman build --network host -f Containerfile -t ${{ env.IMAGE_NAME }}:latest .
-
-            # Extract version for tagging
-            VERSION=$(cat build-output/version)
-            echo "Built Jellyfin ${VERSION}"
-            doas podman tag ${{ env.IMAGE_NAME }}:latest ${{ env.IMAGE_NAME }}:${VERSION}
-
-            # Push if not a PR
-            if [ "${{ github.event_name }}" != "pull_request" ]; then
-              echo "==> Logging in to registry..."
-              echo "$GITHUB_TOKEN" | doas podman login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-
-              echo "==> Pushing images..."
-              doas podman push ${{ env.IMAGE_NAME }}:latest
-              doas podman push ${{ env.IMAGE_NAME }}:${VERSION}
-            fi
-
   build-pkg:
     runs-on: ubuntu-latest
     permissions:
@@ -125,11 +56,12 @@ jobs:
               --build-arg BASE_VERSION=15-quarterly \
               -t ${{ env.IMAGE_NAME }}:pkg .
 
-            # Build :pkg-latest (latest packages)
+            # Build :pkg-latest (latest packages) - also tagged as :latest
             echo "==> Building :pkg-latest variant..."
             doas podman build --network host -f Containerfile.pkg \
               --build-arg BASE_VERSION=15 \
-              -t ${{ env.IMAGE_NAME }}:pkg-latest .
+              -t ${{ env.IMAGE_NAME }}:pkg-latest \
+              -t ${{ env.IMAGE_NAME }}:latest .
 
             # Push if not a PR
             if [ "${{ github.event_name }}" != "pull_request" ]; then
@@ -139,4 +71,5 @@ jobs:
               echo "==> Pushing images..."
               doas podman push ${{ env.IMAGE_NAME }}:pkg
               doas podman push ${{ env.IMAGE_NAME }}:pkg-latest
+              doas podman push ${{ env.IMAGE_NAME }}:latest
             fi
