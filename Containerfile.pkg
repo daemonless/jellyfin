@@ -12,19 +12,14 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       io.daemonless.port="8096" \
       io.daemonless.arch="${FREEBSD_ARCH}"
 
-# Install Jellyfin from packages
+# Install Jellyfin from packages and set up directories
 RUN pkg update && \
     pkg install -y jellyfin && \
     pkg clean -ay && \
-    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
-
-# Extract version and create file
-RUN mkdir -p /app && \
-    pkg info jellyfin | sed -n 's/.*Version.*: *//p' | tr -d '\n' > /app/version
-
-# Create required directories
-RUN mkdir -p /config /cache /media && \
-    chown -R bsd:bsd /config /cache /media
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
+    mkdir -p /app /config /cache /media && \
+    pkg info jellyfin | sed -n 's/.*Version.*: *//p' | tr -d '\n' > /app/version && \
+    chown bsd:bsd /config /cache /media
 
 # Copy service definition and init scripts
 COPY root/ /

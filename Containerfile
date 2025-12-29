@@ -30,12 +30,12 @@ RUN pkg update && \
 
 # Copy pre-built Jellyfin (built outside container due to .NET mlock requirement)
 # Uses /usr/local/jellyfin to match :pkg image for config compatibility
-COPY build-output/app /usr/local/jellyfin
-COPY build-output/version /app/version
+COPY --chown=bsd:bsd build-output/app /usr/local/jellyfin
+COPY --chown=bsd:bsd build-output/version /app/version
 
 # Create directories
 RUN mkdir -p /config /cache /media && \
-    chown -R bsd:bsd /config /cache /media /usr/local/jellyfin
+    chown bsd:bsd /config /cache /media
 
 # Copy service definition
 COPY root/ /
