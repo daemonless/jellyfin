@@ -2,6 +2,7 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
+ARG PKG_NAME=jellyfin
 LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.description="The Free Software Media System on FreeBSD (Package)" \
       org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
@@ -10,15 +11,16 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.vendor="daemonless" \
       org.opencontainers.image.authors="daemonless" \
       io.daemonless.port="8096" \
-      io.daemonless.arch="${FREEBSD_ARCH}"
+      io.daemonless.arch="${FREEBSD_ARCH}" \
+      io.daemonless.pkg-name="${PKG_NAME}"
 
-# Install Jellyfin from packages and set up directories
+# Install from FreeBSD packages
 RUN pkg update && \
-    pkg install -y jellyfin && \
+    pkg install -y ${PKG_NAME} && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     mkdir -p /app /config /cache /media && \
-    pkg info jellyfin | sed -n 's/.*Version.*: *//p' | tr -d '\n' > /app/version && \
+    pkg info ${PKG_NAME} | sed -n 's/.*Version.*: *//p' | tr -d '\n' > /app/version && \
     chown bsd:bsd /config /cache /media
 
 # Copy service definition and init scripts
