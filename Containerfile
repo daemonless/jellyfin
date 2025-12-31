@@ -17,10 +17,10 @@ LABEL org.opencontainers.image.title="Jellyfin" \
 # Install from FreeBSD packages
 RUN pkg update && \
     pkg install -y ${PKG_NAME} && \
-    pkg clean -ay && \
-    rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     mkdir -p /app /config /cache /media && \
     pkg rquery '%v' ${PKG_NAME} > /app/version && \
+    pkg clean -ay && \
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
 
 # Copy service definition and init scripts
