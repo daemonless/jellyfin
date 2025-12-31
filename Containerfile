@@ -3,6 +3,9 @@ FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
+ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
+ARG UPSTREAM_JQ=".tag_name"
+
 LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
       org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
@@ -13,7 +16,9 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       io.daemonless.port="8096" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
       io.daemonless.pkg-name="${PKG_NAME}" \
-      io.daemonless.pkg-source="containerfile"
+      io.daemonless.pkg-source="containerfile" \
+      io.daemonless.upstream-url="${UPSTREAM_URL}" \
+      io.daemonless.upstream-jq="${UPSTREAM_JQ}"
 
 # Install from FreeBSD packages
 RUN pkg update && \
