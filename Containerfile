@@ -12,7 +12,8 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.authors="daemonless" \
       io.daemonless.port="8096" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
-      io.daemonless.pkg-name="${PKG_NAME}"
+      io.daemonless.pkg-name="${PKG_NAME}" \
+      io.daemonless.pkg-source="containerfile"
 
 # Install from FreeBSD packages
 RUN pkg update && \
