@@ -5,6 +5,9 @@ ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
+ARG HEALTHCHECK_ENDPOINT="http://localhost:8096/health"
+
+ENV HEALTHCHECK_URL="${HEALTHCHECK_ENDPOINT}"
 
 LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
@@ -18,7 +21,8 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       io.daemonless.pkg-name="${PKG_NAME}" \
       io.daemonless.pkg-source="containerfile" \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
-      io.daemonless.upstream-jq="${UPSTREAM_JQ}"
+      io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
+      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}"
 
 # Install from FreeBSD packages
 RUN pkg update && \
