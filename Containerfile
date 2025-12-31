@@ -5,6 +5,8 @@ FROM ghcr.io/daemonless/arr-base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PACKAGES="ffmpeg fontconfig freetype2 mediainfo libskiasharp"
+ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
+ARG UPSTREAM_SED="s/.*\"tag_name\":\"\\([^\"]*\\)\".*/\\1/p"
 
 LABEL org.opencontainers.image.title="Jellyfin" \
     org.opencontainers.image.description="The Free Software Media System on FreeBSD" \
@@ -18,8 +20,8 @@ LABEL org.opencontainers.image.title="Jellyfin" \
     io.daemonless.arch="${FREEBSD_ARCH}" \
     org.freebsd.jail.allow.mlock="required" \
     io.daemonless.category="Media Servers" \
-    io.daemonless.upstream-mode="github" \
-    io.daemonless.upstream-repo="jellyfin/jellyfin" \
+    io.daemonless.upstream-url="${UPSTREAM_URL}" \
+    io.daemonless.upstream-sed="${UPSTREAM_SED}" \
     io.daemonless.packages="${PACKAGES}"
 
 # Runtime dependencies
