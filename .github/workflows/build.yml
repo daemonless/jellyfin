@@ -8,66 +8,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/daemonless/jellyfin
-
 jobs:
-  build-pkg:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Build pkg variants in FreeBSD VM
-        uses: vmactions/freebsd-vm@v1.3.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-        with:
-          release: "15.0"
-          usesh: true
-          copyback: false
-          sync: rsync
-          envs: "GITHUB_TOKEN GITHUB_ACTOR"
-          prepare: |
-            pkg install -y podman doas
-            echo "permit nopass keepenv :wheel" > /usr/local/etc/doas.conf
-            # Setup networking for podman
-            kldload pf
-            sysctl net.inet.ip.forwarding=1
-            cp /usr/local/etc/containers/pf.conf.sample /etc/pf.conf
-            # Get egress interface
-            EGRESS=$(route -n get default | awk '/interface:/ {print $2}')
-            sed -i '' "s/vtnet0/$EGRESS/g" /etc/pf.conf
-            service pf onestart
-          run: |
-            set -e
-
-            # Build :pkg (quarterly packages)
-            echo "==> Building :pkg variant..."
-            doas podman build --network host \
-              --build-arg BASE_VERSION=15-quarterly \
-              -t ${{ env.IMAGE_NAME }}:pkg .
-
-            # Build :pkg-latest (latest packages) - also tagged as :latest
-            echo "==> Building :pkg-latest variant..."
-            doas podman build --network host \
-              --build-arg BASE_VERSION=15 \
-              -t ${{ env.IMAGE_NAME }}:pkg-latest \
-              -t ${{ env.IMAGE_NAME }}:latest .
-
-            # Push if not a PR
-            if [ "${{ github.event_name }}" != "pull_request" ]; then
-              echo "==> Logging in to registry..."
-              echo "$GITHUB_TOKEN" | doas podman login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
-
-              echo "==> Pushing images..."
-              doas podman push ${{ env.IMAGE_NAME }}:pkg
-              doas podman push ${{ env.IMAGE_NAME }}:pkg-latest
-              doas podman push ${{ env.IMAGE_NAME }}:latest
-            fi
+  build:
+    uses: daemonless/daemonless/.github/workflows/build-app.yml@main
+    with:
+      image_name: jellyfin
+    secrets: inherit
