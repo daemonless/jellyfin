@@ -1,7 +1,0 @@
-#!/usr/local/bin/execlineb -P
-/usr/local/bin/s6-setuidgid bsd
-/usr/local/jellyfin/jellyfin
-    --datadir /config
-    --cachedir /cache
-    --ffmpeg /usr/local/bin/ffmpeg
-    --webdir /usr/local/jellyfin/jellyfin-web

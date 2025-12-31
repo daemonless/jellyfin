@@ -1,7 +1,5 @@
 name: Build FreeBSD Container
 
-# NOTE: :latest currently aliases to :pkg-latest until source build is fixed
-
 on:
   push:
     branches: [main]
@@ -52,13 +50,13 @@ jobs:
 
             # Build :pkg (quarterly packages)
             echo "==> Building :pkg variant..."
-            doas podman build --network host -f Containerfile.pkg \
+            doas podman build --network host \
               --build-arg BASE_VERSION=15-quarterly \
               -t ${{ env.IMAGE_NAME }}:pkg .
 
             # Build :pkg-latest (latest packages) - also tagged as :latest
             echo "==> Building :pkg-latest variant..."
-            doas podman build --network host -f Containerfile.pkg \
+            doas podman build --network host \
               --build-arg BASE_VERSION=15 \
               -t ${{ env.IMAGE_NAME }}:pkg-latest \
               -t ${{ env.IMAGE_NAME }}:latest .
