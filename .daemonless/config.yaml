@@ -2,5 +2,5 @@ icon: ':simple-jellyfin:'
 cit:
   mode: screenshot
   port: 8096
-  wait: 30
+  wait: 300
   ready: "Startup complete"

@@ -5,21 +5,32 @@ ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
+{%- if ports %}
+ARG HEALTHCHECK_ENDPOINT="http://localhost:{{ ports[0].port }}/health"
+{%- else %}
 ARG HEALTHCHECK_ENDPOINT="http://localhost:8096/health"
+{%- endif %}
 
 ENV HEALTHCHECK_URL="${HEALTHCHECK_ENDPOINT}"
 
 # --- Metadata (Injected by Generator) ---
-LABEL org.opencontainers.image.title="Jellyfin" \
-      org.opencontainers.image.description="The Free Software Media System on FreeBSD." \
-      org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
-      org.opencontainers.image.url="https://jellyfin.org/" \
+LABEL org.opencontainers.image.title="{{ title }}" \
+      org.opencontainers.image.description="{{ description }}" \
+      org.opencontainers.image.source="{{ repo_url }}" \
+      org.opencontainers.image.url="{{ web_url }}" \
       org.opencontainers.image.licenses="GPL-2.0-only" \
       org.opencontainers.image.vendor="daemonless" \
       org.opencontainers.image.authors="daemonless" \
-      io.daemonless.category="Media Servers" \
-      io.daemonless.port="8096" \
-      io.daemonless.volumes="/config,/cache,/media" \
+      io.daemonless.category="{{ category }}" \
+{%- if ports %}
+      io.daemonless.port="{{ ports[0].port }}" \
+{%- endif %}
+{%- if volumes %}
+      io.daemonless.volumes="{{ volumes | map(attribute='path') | join(',') }}" \
+{%- endif %}
+{%- if mlock %}
+      org.freebsd.jail.allow.mlock="required" \
+{%- endif %}
       io.daemonless.arch="${FREEBSD_ARCH}" \
       io.daemonless.pkg-name="${PKG_NAME}" \
       io.daemonless.pkg-source="containerfile" \
@@ -41,7 +52,11 @@ COPY root/ /
 RUN chmod +x /etc/services.d/jellyfin/run /etc/cont-init.d/* 2>/dev/null || true
 
 # --- Expose (Injected by Generator) ---
-EXPOSE 8096
+{%- if ports %}
+EXPOSE {{ ports | map(attribute='port') | join(' ') }}
+{%- endif %}
 
 # --- Volumes (Injected by Generator) ---
-VOLUME /config /cache /media
+{%- if volumes %}
+VOLUME {{ volumes | map(attribute='path') | join(' ') }}
+{%- endif %}
