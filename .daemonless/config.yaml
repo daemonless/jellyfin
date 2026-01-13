@@ -4,3 +4,5 @@ cit:
   port: 8096
   wait: 300
   ready: "Startup complete"
+  annotations:
+    - org.freebsd.jail.allow.mlock=true
