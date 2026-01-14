@@ -19,7 +19,7 @@ LABEL org.opencontainers.image.title="Jellyfin" \
       org.opencontainers.image.authors="daemonless" \
       io.daemonless.category="Media Servers" \
       io.daemonless.port="8096" \
-      io.daemonless.volumes="/config,/cache,/media" \
+      io.daemonless.volumes="/config,/cache,/tv,/movies" \
       io.daemonless.arch="${FREEBSD_ARCH}" \
       io.daemonless.pkg-name="${PKG_NAME}" \
       io.daemonless.pkg-source="containerfile" \
@@ -44,4 +44,4 @@ RUN chmod +x /etc/services.d/jellyfin/run /etc/cont-init.d/* 2>/dev/null || true
 EXPOSE 8096
 
 # --- Volumes (Injected by Generator) ---
-VOLUME /config /cache /media
+VOLUME /config /cache /tv /movies

@@ -25,7 +25,8 @@ services:
     volumes:
       - /path/to/containers/jellyfin:/config
       - /path/to/containers/jellyfin/cache:/cache # optional
-      - /path/to/media:/media
+      - /path/to/tv:/tv # optional
+      - /path/to/movies:/movies # optional
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -41,7 +42,8 @@ podman run -d --name jellyfin \
   -e TZ=@TZ@ \
   -v /path/to/containers/jellyfin:/config \ 
   -v /path/to/containers/jellyfin/cache:/cache \  # optional
-  -v /path/to/media:/media \ 
+  -v /path/to/tv:/tv \  # optional
+  -v /path/to/movies:/movies \  # optional
   ghcr.io/daemonless/jellyfin:latest
 ```
 Access at: `http://localhost:8096`
@@ -56,19 +58,19 @@ Access at: `http://localhost:8096`
     state: started
     restart_policy: always
     env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
+      PUID: "@PUID@"
+      PGID: "@PGID@"
+      TZ: "@TZ@"
     ports:
       - "8096:8096"
     volumes:
       - "/path/to/containers/jellyfin:/config"
       - "/path/to/containers/jellyfin/cache:/cache" # optional
-      - "/path/to/media:/media"
+      - "/path/to/tv:/tv" # optional
+      - "/path/to/movies:/movies" # optional
 ```
 
 ## Configuration
-
 ### Environment Variables
 
 | Variable | Default | Description |
@@ -76,15 +78,14 @@ Access at: `http://localhost:8096`
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
-
 ### Volumes
 
 | Path | Description |
 |------|-------------|
 | `/config` | Configuration directory |
 | `/cache` | Cache directory (Optional) |
-| `/media` | Media library |
-
+| `/tv` | TV Series library (Optional) |
+| `/movies` | Movie library (Optional) |
 ### Ports
 
 | Port | Protocol | Description |

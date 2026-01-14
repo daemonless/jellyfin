@@ -22,8 +22,12 @@ x-daemonless:
       /cache:
         desc: "Cache directory"
         optional: true
-      /media:
-        desc: "Media library"
+      /tv:
+        desc: "TV Series library"
+        optional: true
+      /movies:
+        desc: "Movie library"
+        optional: true
     ports:
       8096: "Web UI"
 
@@ -44,7 +48,8 @@ services:
     volumes:
       - /path/to/containers/jellyfin:/config
       - /path/to/cache:/cache # optional
-      - /path/to/media:/media
+      - /path/to/tv:/tv # optional
+      - /path/to/movies:/movies # optional
 
     ports:
       - 8096:8096
