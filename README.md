@@ -24,11 +24,13 @@ services:
       - TZ=UTC
     volumes:
       - /path/to/containers/jellyfin:/config
-      - /path/to/containers/jellyfin/cache:/cache # optional
-      - /path/to/tv:/tv # optional
-      - /path/to/movies:/movies # optional
+      - /path/to/path/to/cache:/cache
+      - /path/to/path/to/tv:/tv
+      - /path/to/path/to/movies:/movies
     ports:
       - 8096:8096
+    annotations:
+      org.freebsd.jail.allow.mlock: "true"
     restart: unless-stopped
 ```
 
@@ -37,13 +39,14 @@ services:
 ```bash
 podman run -d --name jellyfin \
   -p 8096:8096 \
+  --annotation 'org.freebsd.jail.allow.mlock=true' \
   -e PUID=@PUID@ \
   -e PGID=@PGID@ \
   -e TZ=@TZ@ \
   -v /path/to/containers/jellyfin:/config \ 
-  -v /path/to/containers/jellyfin/cache:/cache \  # optional
-  -v /path/to/tv:/tv \  # optional
-  -v /path/to/movies:/movies \  # optional
+  -v /path/to/path/to/cache:/cache \ 
+  -v /path/to/path/to/tv:/tv \ 
+  -v /path/to/path/to/movies:/movies \ 
   ghcr.io/daemonless/jellyfin:latest
 ```
 Access at: `http://localhost:8096`
@@ -65,9 +68,11 @@ Access at: `http://localhost:8096`
       - "8096:8096"
     volumes:
       - "/path/to/containers/jellyfin:/config"
-      - "/path/to/containers/jellyfin/cache:/cache" # optional
-      - "/path/to/tv:/tv" # optional
-      - "/path/to/movies:/movies" # optional
+      - "/path/to/path/to/cache:/cache"
+      - "/path/to/path/to/tv:/tv"
+      - "/path/to/path/to/movies:/movies"
+    annotation:
+      org.freebsd.jail.allow.mlock: "true"
 ```
 
 ## Configuration
@@ -83,9 +88,9 @@ Access at: `http://localhost:8096`
 | Path | Description |
 |------|-------------|
 | `/config` | Configuration directory |
-| `/cache` | Cache directory (Optional) |
-| `/tv` | TV Series library (Optional) |
-| `/movies` | Movie library (Optional) |
+| `/cache` | {'desc': 'Cache directory', 'optional': True} |
+| `/tv` | {'desc': 'TV Series library', 'optional': True} |
+| `/movies` | {'desc': 'Movie library', 'optional': True} |
 ### Ports
 
 | Port | Protocol | Description |
@@ -96,3 +101,4 @@ Access at: `http://localhost:8096`
 
 - **User:** `bsd` (UID/GID set via PUID/PGID)
 - **Base:** Built on `ghcr.io/daemonless/base` (FreeBSD)
+- **.NET App:** Requires `--annotation 'org.freebsd.jail.allow.mlock=true'` and a [patched ocijail](https://daemonless.io/guides/ocijail-patch).
