@@ -11,6 +11,7 @@ The Free Software Media System on FreeBSD.
 |---|---|
 | **Port** | 8096 |
 | **Registry** | `ghcr.io/daemonless/jellyfin` |
+| **Docs** | [daemonless.io/images/jellyfin](https://daemonless.io/images/jellyfin/) |
 | **Source** | [https://github.com/jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) |
 | **Website** | [https://jellyfin.org/](https://jellyfin.org/) |
 
