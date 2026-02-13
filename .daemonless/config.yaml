@@ -7,3 +7,14 @@ cit:
   screenshot_wait: 10
   annotations:
     - org.freebsd.jail.allow.mlock=true
+
+build:
+  variants:
+    - tag: pkg
+      containerfile: Containerfile.pkg
+      aliases: ["latest"]
+      default: true
+    - tag: pkg-latest
+      containerfile: Containerfile.pkg
+      args:
+        BASE_VERSION: "15-latest"
