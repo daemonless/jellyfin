@@ -1,0 +1,62 @@
+name: jellyfin
+
+x-daemonless:
+  title: "Jellyfin"
+  icon: ":simple-jellyfin:"
+  category: "Media Servers"
+  description: "The Free Software Media System on FreeBSD."
+  upstream_url: "https://github.com/jellyfin/jellyfin"
+  web_url: "https://jellyfin.org/"
+  freshports_url: "https://www.freshports.org/multimedia/jellyfin/"
+  user: "bsd"
+  mlock: true
+  upstream_binary: false
+  
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+    volumes:
+      /config: "Configuration directory"
+      /cache:
+        desc: "Cache directory"
+        optional: true
+      /tv:
+        desc: "TV Series library"
+        optional: true
+      /movies:
+        desc: "Movie library"
+        optional: true
+    ports:
+      8096: "Web UI"
+
+services:
+  jellyfin:
+    image: ghcr.io/daemonless/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    network_mode: host
+    
+    annotations:
+      org.freebsd.jail.allow.mlock: "true"
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+    volumes:
+      - smoke_vol_49:/config
+      - smoke_vol_50:/cache # optional
+      - smoke_vol_51:/tv # optional
+      - smoke_vol_52:/movies # optional
+
+    ports:
+      - :8096
+
+volumes:
+  smoke_vol_49: {}
+  smoke_vol_50: {}
+  smoke_vol_51: {}
+  smoke_vol_52: {}
