@@ -1,12 +1,12 @@
 {
   "image": "jellyfin",
-  "generated": "2026-02-13T22:03:16Z",
+  "generated": "2026-02-16T18:16:47Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
       "app_version": "10.11.6",
       "source": "pkg",
-      "generated": "2026-02-13T21:59:16Z",
+      "generated": "2026-02-16T18:16:07Z",
       "packages": {
         "freebsd": [
           {
@@ -171,7 +171,7 @@
           },
           {
             "name": "dav1d",
-            "version": "1.5.3"
+            "version": "1.5.3_1"
           },
           {
             "name": "execline",
@@ -183,7 +183,7 @@
           },
           {
             "name": "ffmpeg",
-            "version": "8.0.1_4,1"
+            "version": "8.0.1_5,1"
           },
           {
             "name": "fontconfig",
@@ -239,7 +239,7 @@
           },
           {
             "name": "hwdata",
-            "version": "0.403,1"
+            "version": "0.404,1"
           },
           {
             "name": "icu",
@@ -375,7 +375,7 @@
           },
           {
             "name": "libjxl",
-            "version": "0.11.1_3"
+            "version": "0.11.2"
           },
           {
             "name": "libmediainfo",
@@ -395,7 +395,7 @@
           },
           {
             "name": "libplacebo",
-            "version": "7.351.0_2"
+            "version": "7.360.0"
           },
           {
             "name": "libpsl",
@@ -615,7 +615,7 @@
           },
           {
             "name": "suitesparse-config",
-            "version": "7.12.1"
+            "version": "7.12.2"
           },
           {
             "name": "suitesparse-umfpack",
@@ -668,36 +668,12 @@
         ],
         "dotnet": [
           {
-            "name": "MediaBrowser.Providers",
-            "version": "1.0.0"
+            "name": "Jellyfin.Data",
+            "version": "10.11.6"
           },
           {
             "name": "AsyncKeyedLock",
             "version": "7.1.8"
-          },
-          {
-            "name": "LrcParser",
-            "version": "2025.623.0"
-          },
-          {
-            "name": "MetaBrainz.MusicBrainz",
-            "version": "6.1.0"
-          },
-          {
-            "name": "Newtonsoft.Json",
-            "version": "13.0.4"
-          },
-          {
-            "name": "PlaylistsNET",
-            "version": "1.4.1"
-          },
-          {
-            "name": "TMDbLib",
-            "version": "2.3.0"
-          },
-          {
-            "name": "z440.atl.core",
-            "version": "7.9.0"
           },
           {
             "name": "BDInfo",
@@ -772,12 +748,20 @@
             "version": "10.8.0"
           },
           {
+            "name": "LrcParser",
+            "version": "2025.623.0"
+          },
+          {
             "name": "MetaBrainz.Common",
             "version": "3.0.0"
           },
           {
             "name": "MetaBrainz.Common.Json",
             "version": "6.0.2"
+          },
+          {
+            "name": "MetaBrainz.MusicBrainz",
+            "version": "6.1.0"
           },
           {
             "name": "Microsoft.Data.Sqlite.Core",
@@ -822,6 +806,14 @@
           {
             "name": "NEbml",
             "version": "1.1.0.5"
+          },
+          {
+            "name": "Newtonsoft.Json",
+            "version": "13.0.4"
+          },
+          {
+            "name": "PlaylistsNET",
+            "version": "1.4.1"
           },
           {
             "name": "Polly",
@@ -944,6 +936,10 @@
             "version": "6.0.3"
           },
           {
+            "name": "TMDbLib",
+            "version": "2.3.0"
+          },
+          {
             "name": "TagLibSharp",
             "version": "2.3.0"
           },
@@ -970,6 +966,10 @@
           {
             "name": "prometheus-net.DotNetRuntime",
             "version": "4.4.1"
+          },
+          {
+            "name": "z440.atl.core",
+            "version": "7.9.0"
           },
           {
             "name": "zlib.net-mutliplatform",
@@ -1019,7 +1019,7 @@
       "arch": "amd64",
       "app_version": "10.11.5",
       "source": "pkg",
-      "generated": "2026-02-13T21:57:38Z",
+      "generated": "2026-02-16T18:16:38Z",
       "packages": {
         "freebsd": [
           {
@@ -1388,7 +1388,7 @@
           },
           {
             "name": "libjxl",
-            "version": "0.11.1_2"
+            "version": "0.11.2"
           },
           {
             "name": "libmediainfo",
@@ -1681,8 +1681,12 @@
         ],
         "dotnet": [
           {
-            "name": "MediaBrowser.MediaEncoding",
+            "name": "Emby.Photos",
             "version": "1.0.0"
+          },
+          {
+            "name": "TagLibSharp",
+            "version": "2.3.0"
           },
           {
             "name": "AsyncKeyedLock",
@@ -1691,22 +1695,6 @@
           {
             "name": "BDInfo",
             "version": "0.8.0"
-          },
-          {
-            "name": "Microsoft.Extensions.Http",
-            "version": "9.0.11"
-          },
-          {
-            "name": "System.Text.Encoding.CodePages",
-            "version": "9.0.11"
-          },
-          {
-            "name": "UTF.Unknown",
-            "version": "2.6.0"
-          },
-          {
-            "name": "libse",
-            "version": "4.0.12"
           },
           {
             "name": "BitFaster.Caching",
@@ -1901,6 +1889,10 @@
             "version": "9.0.11"
           },
           {
+            "name": "Microsoft.Extensions.Http",
+            "version": "9.0.11"
+          },
+          {
             "name": "Microsoft.Extensions.Logging",
             "version": "9.0.11"
           },
@@ -2065,6 +2057,10 @@
             "version": "6.0.3"
           },
           {
+            "name": "System.Text.Encoding.CodePages",
+            "version": "9.0.11"
+          },
+          {
             "name": "System.Text.Json",
             "version": "9.0.11"
           },
@@ -2077,12 +2073,16 @@
             "version": "2.3.0"
           },
           {
-            "name": "TagLibSharp",
-            "version": "2.3.0"
+            "name": "UTF.Unknown",
+            "version": "2.6.0"
           },
           {
             "name": "Ude.NetStandard",
             "version": "1.2.0"
+          },
+          {
+            "name": "libse",
+            "version": "4.0.12"
           },
           {
             "name": "prometheus-net",
