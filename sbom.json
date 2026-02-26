@@ -1,12 +1,12 @@
 {
   "image": "jellyfin",
-  "generated": "2026-02-16T18:16:47Z",
+  "generated": "2026-02-26T23:27:22Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
       "app_version": "10.11.6",
       "source": "pkg",
-      "generated": "2026-02-16T18:16:07Z",
+      "generated": "2026-02-26T23:27:06Z",
       "packages": {
         "freebsd": [
           {
@@ -403,7 +403,7 @@
           },
           {
             "name": "librsvg2-rust",
-            "version": "2.61.3_1"
+            "version": "2.61.4"
           },
           {
             "name": "libskiasharp",
@@ -511,7 +511,7 @@
           },
           {
             "name": "openexr",
-            "version": "3.4.4_1"
+            "version": "3.4.5"
           },
           {
             "name": "openjph",
@@ -543,7 +543,7 @@
           },
           {
             "name": "png",
-            "version": "1.6.54"
+            "version": "1.6.55"
           },
           {
             "name": "py311-boost-libs",
@@ -668,7 +668,7 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Data",
+            "name": "Jellyfin.Common",
             "version": "10.11.6"
           },
           {
@@ -1019,7 +1019,7 @@
       "arch": "amd64",
       "app_version": "10.11.5",
       "source": "pkg",
-      "generated": "2026-02-16T18:16:38Z",
+      "generated": "2026-02-26T23:26:40Z",
       "packages": {
         "freebsd": [
           {
@@ -1681,12 +1681,16 @@
         ],
         "dotnet": [
           {
-            "name": "Emby.Photos",
-            "version": "1.0.0"
+            "name": "Jellyfin.Common",
+            "version": "10.11.5"
           },
           {
-            "name": "TagLibSharp",
-            "version": "2.3.0"
+            "name": "Microsoft.Extensions.Configuration.Abstractions",
+            "version": "9.0.11"
+          },
+          {
+            "name": "Microsoft.Extensions.DependencyInjection.Abstractions",
+            "version": "9.0.11"
           },
           {
             "name": "AsyncKeyedLock",
@@ -1821,10 +1825,6 @@
             "version": "9.0.11"
           },
           {
-            "name": "Microsoft.Extensions.Configuration.Abstractions",
-            "version": "9.0.11"
-          },
-          {
             "name": "Microsoft.Extensions.Configuration.Binder",
             "version": "9.0.11"
           },
@@ -1842,10 +1842,6 @@
           },
           {
             "name": "Microsoft.Extensions.DependencyInjection",
-            "version": "9.0.11"
-          },
-          {
-            "name": "Microsoft.Extensions.DependencyInjection.Abstractions",
             "version": "9.0.11"
           },
           {
@@ -2070,6 +2066,10 @@
           },
           {
             "name": "TMDbLib",
+            "version": "2.3.0"
+          },
+          {
+            "name": "TagLibSharp",
             "version": "2.3.0"
           },
           {
