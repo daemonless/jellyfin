@@ -1,12 +1,12 @@
 {
   "image": "jellyfin",
-  "generated": "2026-02-26T23:27:22Z",
+  "generated": "2026-03-08T00:23:55Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
       "app_version": "10.11.6",
       "source": "pkg",
-      "generated": "2026-02-26T23:27:06Z",
+      "generated": "2026-03-08T00:23:11Z",
       "packages": {
         "freebsd": [
           {
@@ -223,7 +223,7 @@
           },
           {
             "name": "gnutls",
-            "version": "3.8.11"
+            "version": "3.8.12"
           },
           {
             "name": "graphite2",
@@ -239,7 +239,7 @@
           },
           {
             "name": "hwdata",
-            "version": "0.404,1"
+            "version": "0.405,1"
           },
           {
             "name": "icu",
@@ -323,7 +323,7 @@
           },
           {
             "name": "libbluray",
-            "version": "1.4.0,1"
+            "version": "1.4.1,1"
           },
           {
             "name": "libdatrie",
@@ -435,7 +435,7 @@
           },
           {
             "name": "libunistring",
-            "version": "1.4.1"
+            "version": "1.4.2"
           },
           {
             "name": "libunwind",
@@ -471,7 +471,7 @@
           },
           {
             "name": "libxml2",
-            "version": "2.15.1_1"
+            "version": "2.15.2"
           },
           {
             "name": "libzen",
@@ -539,7 +539,7 @@
           },
           {
             "name": "pkg",
-            "version": "2.5.1"
+            "version": "2.6.2"
           },
           {
             "name": "png",
@@ -559,7 +559,7 @@
           },
           {
             "name": "python311",
-            "version": "3.11.14_2"
+            "version": "3.11.15"
           },
           {
             "name": "readline",
@@ -668,8 +668,28 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Common",
-            "version": "10.11.6"
+            "name": "Jellyfin.Drawing.Skia",
+            "version": "1.0.0"
+          },
+          {
+            "name": "BlurHashSharp",
+            "version": "1.4.0-pre.1"
+          },
+          {
+            "name": "BlurHashSharp.SkiaSharp",
+            "version": "1.4.0-pre.1"
+          },
+          {
+            "name": "SkiaSharp",
+            "version": "3.116.1"
+          },
+          {
+            "name": "SkiaSharp.HarfBuzz",
+            "version": "3.116.1"
+          },
+          {
+            "name": "Svg.Skia",
+            "version": "3.2.1"
           },
           {
             "name": "AsyncKeyedLock",
@@ -682,14 +702,6 @@
           {
             "name": "BitFaster.Caching",
             "version": "2.5.4"
-          },
-          {
-            "name": "BlurHashSharp",
-            "version": "1.4.0-pre.1"
-          },
-          {
-            "name": "BlurHashSharp.SkiaSharp",
-            "version": "1.4.0-pre.1"
           },
           {
             "name": "CommandLineParser",
@@ -892,23 +904,11 @@
             "version": "3.2.1"
           },
           {
-            "name": "SkiaSharp",
-            "version": "3.116.1"
-          },
-          {
-            "name": "SkiaSharp.HarfBuzz",
-            "version": "3.116.1"
-          },
-          {
             "name": "Svg.Custom",
             "version": "3.2.1"
           },
           {
             "name": "Svg.Model",
-            "version": "3.2.1"
-          },
-          {
-            "name": "Svg.Skia",
             "version": "3.2.1"
           },
           {
@@ -1019,7 +1019,7 @@
       "arch": "amd64",
       "app_version": "10.11.5",
       "source": "pkg",
-      "generated": "2026-02-26T23:26:40Z",
+      "generated": "2026-03-08T00:23:44Z",
       "packages": {
         "freebsd": [
           {
@@ -1192,7 +1192,7 @@
           },
           {
             "name": "expat",
-            "version": "2.7.3"
+            "version": "2.7.4"
           },
           {
             "name": "ffmpeg",
@@ -1236,7 +1236,7 @@
           },
           {
             "name": "gnutls",
-            "version": "3.8.11"
+            "version": "3.8.12"
           },
           {
             "name": "graphite2",
@@ -1484,7 +1484,7 @@
           },
           {
             "name": "libxml2",
-            "version": "2.15.1"
+            "version": "2.15.2"
           },
           {
             "name": "libzen",
@@ -1524,7 +1524,7 @@
           },
           {
             "name": "openexr",
-            "version": "3.4.4"
+            "version": "3.4.5"
           },
           {
             "name": "openjph",
@@ -1572,7 +1572,7 @@
           },
           {
             "name": "python311",
-            "version": "3.11.14_2"
+            "version": "3.11.15"
           },
           {
             "name": "readline",
@@ -1681,15 +1681,11 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Common",
-            "version": "10.11.5"
+            "name": "Jellyfin.Database.Providers.Sqlite",
+            "version": "1.0.0"
           },
           {
-            "name": "Microsoft.Extensions.Configuration.Abstractions",
-            "version": "9.0.11"
-          },
-          {
-            "name": "Microsoft.Extensions.DependencyInjection.Abstractions",
+            "name": "Microsoft.EntityFrameworkCore.Relational",
             "version": "9.0.11"
           },
           {
@@ -1805,10 +1801,6 @@
             "version": "9.0.11"
           },
           {
-            "name": "Microsoft.EntityFrameworkCore.Relational",
-            "version": "9.0.11"
-          },
-          {
             "name": "Microsoft.EntityFrameworkCore.Sqlite.Core",
             "version": "9.0.11"
           },
@@ -1822,6 +1814,10 @@
           },
           {
             "name": "Microsoft.Extensions.Configuration",
+            "version": "9.0.11"
+          },
+          {
+            "name": "Microsoft.Extensions.Configuration.Abstractions",
             "version": "9.0.11"
           },
           {
@@ -1842,6 +1838,10 @@
           },
           {
             "name": "Microsoft.Extensions.DependencyInjection",
+            "version": "9.0.11"
+          },
+          {
+            "name": "Microsoft.Extensions.DependencyInjection.Abstractions",
             "version": "9.0.11"
           },
           {
