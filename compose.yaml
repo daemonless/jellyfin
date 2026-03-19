@@ -4,14 +4,15 @@ x-daemonless:
   title: "Jellyfin"
   icon: ":simple-jellyfin:"
   category: "Media Servers"
-  description: "The Free Software Media System on FreeBSD."
+  description: "Volunteer-built media solution that puts you in control — stream to any device from your own server, with no strings attached."
   upstream_url: "https://github.com/jellyfin/jellyfin"
   web_url: "https://jellyfin.org/"
   freshports_url: "https://www.freshports.org/multimedia/jellyfin/"
   user: "bsd"
   mlock: true
   upstream_binary: false
-  
+  appjail: true
+
   docs:
     env:
       PUID: "User ID for the application process"

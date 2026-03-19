@@ -17,7 +17,7 @@ ENV HEALTHCHECK_URL="${HEALTHCHECK_ENDPOINT}"
 
 # --- Metadata (Injected by Generator) ---
 LABEL org.opencontainers.image.title="Jellyfin" \
-      org.opencontainers.image.description="The Free Software Media System on FreeBSD." \
+      org.opencontainers.image.description="Volunteer-built media solution that puts you in control — stream to any device from your own server, with no strings attached." \
       org.opencontainers.image.source="https://github.com/daemonless/jellyfin" \
       org.opencontainers.image.url="https://jellyfin.org/" \
       org.opencontainers.image.licenses="GPL-2.0-only" \

@@ -5,15 +5,28 @@ Source: dbuild templates
 
 # Jellyfin
 
-The Free Software Media System on FreeBSD.
+[![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/jellyfin/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/jellyfin/actions)
+[![Last Commit](https://img.shields.io/github/last-commit/daemonless/jellyfin?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/jellyfin/commits)
+
+Volunteer-built media solution that puts you in control — stream to any device from your own server, with no strings attached.
 
 | | |
 |---|---|
 | **Port** | 8096 |
 | **Registry** | `ghcr.io/daemonless/jellyfin` |
-| **Docs** | [daemonless.io/images/jellyfin](https://daemonless.io/images/jellyfin/) |
 | **Source** | [https://github.com/jellyfin/jellyfin](https://github.com/jellyfin/jellyfin) |
 | **Website** | [https://jellyfin.org/](https://jellyfin.org/) |
+
+## Version Tags
+
+| Tag | Description | Best For |
+| :--- | :--- | :--- |
+| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+
+## Prerequisites
+
+Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
 
@@ -29,15 +42,69 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - /path/to/containers/jellyfin:/config
-      - /path/to/containers/jellyfin/cache:/cache # optional
-      - /path/to/tv:/tv # optional
-      - /path/to/movies:/movies # optional
+      - "/path/to/containers/jellyfin:/config"
+      - "/path/to/containers/jellyfin/cache:/cache" # optional
+      - "/path/to/tv:/tv" # optional
+      - "/path/to/movies:/movies" # optional
     ports:
       - 8096:8096
     annotations:
       org.freebsd.jail.allow.mlock: "true"
     restart: unless-stopped
+```
+
+### AppJail Director
+
+**.env**:
+
+```
+DIRECTOR_PROJECT=jellyfin
+PUID=1000
+PGID=1000
+TZ=UTC
+```
+
+**appjail-director.yml**:
+
+```yaml
+options:
+  - virtualnet: ':<random> default'
+  - nat:
+services:
+  jellyfin:
+    name: jellyfin
+    options:
+      - container: 'boot args:--pull'
+    oci:
+      user: root
+      environment:
+        - PUID: !ENV '${PUID}'
+        - PGID: !ENV '${PGID}'
+        - TZ: !ENV '${TZ}'
+    volumes:
+      - jellyfin: /config
+      - jellyfin_cache: /cache
+      - tv: /tv
+      - movies: /movies
+volumes:
+  jellyfin:
+    device: '/path/to/containers/jellyfin'
+  jellyfin_cache:
+    device: '/path/to/containers/jellyfin/cache'
+  tv:
+    device: 'tv'
+  movies:
+    device: 'movies'
+```
+
+**Makejail**:
+
+```
+ARG tag=latest
+
+OPTION overwrite=force
+OPTION from=ghcr.io/daemonless/jellyfin:${tag}
+SET allow.mlock=1
 ```
 
 ### Podman CLI
@@ -46,16 +113,15 @@ services:
 podman run -d --name jellyfin \
   -p 8096:8096 \
   --annotation 'org.freebsd.jail.allow.mlock=true' \
-  -e PUID=@PUID@ \
-  -e PGID=@PGID@ \
-  -e TZ=@TZ@ \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
   -v /path/to/containers/jellyfin:/config \
-  -v /path/to/containers/jellyfin/cache:/cache \ # optional
-  -v /path/to/tv:/tv \ # optional
-  -v /path/to/movies:/movies \ # optional
+  -v /path/to/containers/jellyfin/cache:/cache # optional \
+  -v /path/to/tv:/tv # optional \
+  -v /path/to/movies:/movies # optional \
   ghcr.io/daemonless/jellyfin:latest
 ```
-Access at: `http://localhost:8096`
 
 ### Ansible
 
@@ -67,9 +133,9 @@ Access at: `http://localhost:8096`
     state: started
     restart_policy: always
     env:
-      PUID: "@PUID@"
-      PGID: "@PGID@"
-      TZ: "@TZ@"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "UTC"
     ports:
       - "8096:8096"
     volumes:
@@ -81,7 +147,10 @@ Access at: `http://localhost:8096`
       org.freebsd.jail.allow.mlock: "true"
 ```
 
-## Configuration
+Access at: `http://localhost:8096`
+
+## Parameters
+
 ### Environment Variables
 
 | Variable | Default | Description |
@@ -89,6 +158,7 @@ Access at: `http://localhost:8096`
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+
 ### Volumes
 
 | Path | Description |
@@ -97,15 +167,17 @@ Access at: `http://localhost:8096`
 | `/cache` | Cache directory (Optional) |
 | `/tv` | TV Series library (Optional) |
 | `/movies` | Movie library (Optional) |
+
 ### Ports
 
 | Port | Protocol | Description |
 |------|----------|-------------|
 | `8096` | TCP | Web UI |
 
-## Notes
+**Architectures:** amd64
+**User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
+**Base:** FreeBSD 15.0
 
-- **Architectures:** amd64
-- **User:** `bsd` (UID/GID set via PUID/PGID)
-- **Base:** Built on `ghcr.io/daemonless/base` (FreeBSD)
-- **.NET App:** Requires `--annotation 'org.freebsd.jail.allow.mlock=true'` and a [patched ocijail](https://daemonless.io/guides/ocijail-patch).
+---
+
+Need help? Join our [Discord](https://discord.gg/Kb9tkhecZT) community.
