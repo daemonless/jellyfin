@@ -174,6 +174,40 @@ Access at: `http://localhost:8096`
 |------|----------|-------------|
 | `8096` | TCP | Web UI |
 
+## Hardware Acceleration (VAAPI)
+
+Intel iGPU hardware transcoding is supported via VAAPI. The image includes
+`libva`, `libva-intel-media-driver`, and `gmmlib`.
+
+**Host setup required** — the GPU must be enabled and a devfs ruleset must
+expose the DRI devices into the jail:
+
+1. Install the DRM kernel module and firmware:
+   ```
+   pkg install drm-kmod libva-intel-media-driver gmmlib
+   echo 'kld_list="i915kms"' >> /etc/rc.conf
+   kldload i915kms
+   ```
+
+2. Add a devfs ruleset to `/etc/devfs.rules`:
+   ```
+   [devfsrules_jails_gpu=61182]
+   add include $devfsrules_hide_all
+   add include $devfsrules_unhide_basic
+   add include $devfsrules_unhide_login
+   add path 'bpf*' unhide
+   add path 'dri' unhide
+   add path 'dri/*' unhide mode 0666
+   add path 'drm*' unhide mode 0666
+   ```
+
+3. Configure the jail to use ruleset `61182` and enable `allow.mlock`
+   (already set in the example compose above).
+
+4. In Jellyfin: **Dashboard → Playback → Transcoding** → set Hardware
+   acceleration to **VAAPI**, device `/dev/dri/renderD128`.
+
+
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.0

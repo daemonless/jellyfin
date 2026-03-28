@@ -2,7 +2,7 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-ARG PKG_NAME=jellyfin
+ARG PACKAGES="jellyfin libva libva-intel-media-driver gmmlib mesa-gallium-va"
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 {%- if ports %}
@@ -32,17 +32,17 @@ LABEL org.opencontainers.image.title="{{ title }}" \
       org.freebsd.jail.allow.mlock="required" \
 {%- endif %}
       io.daemonless.arch="${FREEBSD_ARCH}" \
-      io.daemonless.pkg-name="${PKG_NAME}" \
       io.daemonless.pkg-source="pkg" \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
       io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
-      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}"
+      io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
+      io.daemonless.packages="${PACKAGES}"
 
 # Install from FreeBSD packages
 RUN pkg update && \
-    pkg install -y ${PKG_NAME} && \
+    pkg install -y ${PACKAGES} && \
     mkdir -p /app /config /cache /media && \
-    pkg rquery '%v' ${PKG_NAME} > /app/version && \
+    pkg info jellyfin | sed -n 's/.*Version.*: *//p' > /app/version && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
