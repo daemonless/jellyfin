@@ -2,7 +2,8 @@ ARG BASE_VERSION=15
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
-ARG PACKAGES="jellyfin libva libva-intel-media-driver gmmlib mesa-gallium-va"
+ARG PKG_NAME=jellyfin
+ARG PACKAGES="${PKG_NAME} libva libva-intel-media-driver gmmlib mesa-gallium-va"
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 {%- if ports %}
@@ -36,13 +37,14 @@ LABEL org.opencontainers.image.title="{{ title }}" \
       io.daemonless.upstream-url="${UPSTREAM_URL}" \
       io.daemonless.upstream-jq="${UPSTREAM_JQ}" \
       io.daemonless.healthcheck-url="${HEALTHCHECK_ENDPOINT}" \
+      io.daemonless.pkg-name="${PKG_NAME}" \
       io.daemonless.packages="${PACKAGES}"
 
 # Install from FreeBSD packages
 RUN pkg update && \
     pkg install -y ${PACKAGES} && \
     mkdir -p /app /config /cache /media && \
-    pkg info jellyfin | sed -n 's/.*Version.*: *//p' > /app/version && \
+    pkg info ${PKG_NAME} | sed -n 's/.*Version.*: *//p' > /app/version && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
