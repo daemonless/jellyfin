@@ -1,12 +1,12 @@
 {
   "image": "jellyfin",
-  "generated": "2026-03-08T00:23:55Z",
+  "generated": "2026-03-28T16:30:48Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
       "app_version": "10.11.6",
       "source": "pkg",
-      "generated": "2026-03-08T00:23:11Z",
+      "generated": "2026-03-28T16:29:03Z",
       "packages": {
         "freebsd": [
           {
@@ -139,7 +139,7 @@
           },
           {
             "name": "aom",
-            "version": "3.13.1"
+            "version": "3.13.2"
           },
           {
             "name": "bash",
@@ -175,11 +175,11 @@
           },
           {
             "name": "execline",
-            "version": "2.9.7.0"
+            "version": "2.9.8.1"
           },
           {
             "name": "expat",
-            "version": "2.7.4"
+            "version": "2.7.5"
           },
           {
             "name": "ffmpeg",
@@ -191,7 +191,7 @@
           },
           {
             "name": "freetype2",
-            "version": "2.14.1"
+            "version": "2.14.3"
           },
           {
             "name": "fribidi",
@@ -218,6 +218,10 @@
             "version": "2.84.4,2"
           },
           {
+            "name": "gmmlib",
+            "version": "22.5.4"
+          },
+          {
             "name": "gmp",
             "version": "6.3.0"
           },
@@ -231,7 +235,7 @@
           },
           {
             "name": "harfbuzz",
-            "version": "12.3.2"
+            "version": "13.1.1"
           },
           {
             "name": "highway",
@@ -283,11 +287,15 @@
           },
           {
             "name": "libX11",
-            "version": "1.8.12,1"
+            "version": "1.8.13,1"
           },
           {
             "name": "libXau",
             "version": "1.0.12"
+          },
+          {
+            "name": "libXdamage",
+            "version": "1.1.6"
           },
           {
             "name": "libXdmcp",
@@ -316,6 +324,10 @@
           {
             "name": "libXv",
             "version": "1.0.13,1"
+          },
+          {
+            "name": "libXxf86vm",
+            "version": "1.1.6"
           },
           {
             "name": "libass",
@@ -379,7 +391,7 @@
           },
           {
             "name": "libmediainfo",
-            "version": "25.10"
+            "version": "26.01"
           },
           {
             "name": "libnghttp2",
@@ -395,7 +407,7 @@
           },
           {
             "name": "libplacebo",
-            "version": "7.360.0"
+            "version": "7.360.1"
           },
           {
             "name": "libpsl",
@@ -403,7 +415,7 @@
           },
           {
             "name": "librsvg2-rust",
-            "version": "2.61.4"
+            "version": "2.62.0_1"
           },
           {
             "name": "libskiasharp",
@@ -450,6 +462,10 @@
             "version": "2.23.0"
           },
           {
+            "name": "libva-intel-media-driver",
+            "version": "23.4.3_1"
+          },
+          {
             "name": "libvdpau",
             "version": "1.5"
           },
@@ -474,8 +490,20 @@
             "version": "2.15.2"
           },
           {
+            "name": "libxshmfence",
+            "version": "1.3.3"
+          },
+          {
             "name": "libzen",
-            "version": "0.4.41.25.10,3"
+            "version": "0.4.41.26.01,3"
+          },
+          {
+            "name": "llvm19",
+            "version": "19.1.7_1"
+          },
+          {
+            "name": "lua53",
+            "version": "5.3.6_1"
           },
           {
             "name": "lzo2",
@@ -483,7 +511,11 @@
           },
           {
             "name": "mediainfo",
-            "version": "25.10"
+            "version": "26.01"
+          },
+          {
+            "name": "mesa-gallium-va",
+            "version": "24.1.7"
           },
           {
             "name": "mpc",
@@ -515,7 +547,7 @@
           },
           {
             "name": "openjph",
-            "version": "0.26.0"
+            "version": "0.26.3"
           },
           {
             "name": "opus",
@@ -534,12 +566,16 @@
             "version": "10.47_1"
           },
           {
+            "name": "perl5",
+            "version": "5.42.1"
+          },
+          {
             "name": "pixman",
             "version": "0.46.2"
           },
           {
             "name": "pkg",
-            "version": "2.6.2"
+            "version": "2.6.2_1"
           },
           {
             "name": "png",
@@ -567,11 +603,11 @@
           },
           {
             "name": "s6",
-            "version": "2.13.2.0"
+            "version": "2.14.0.1"
           },
           {
             "name": "s6-rc",
-            "version": "0.5.6.0"
+            "version": "0.6.0.0"
           },
           {
             "name": "shaderc",
@@ -583,7 +619,7 @@
           },
           {
             "name": "skalibs",
-            "version": "2.14.4.0"
+            "version": "2.14.5.1"
           },
           {
             "name": "sqlite3",
@@ -623,7 +659,7 @@
           },
           {
             "name": "svt-av1",
-            "version": "4.0.1"
+            "version": "4.1.0"
           },
           {
             "name": "tiff",
@@ -668,28 +704,12 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Drawing.Skia",
-            "version": "1.0.0"
+            "name": "Jellyfin.MediaEncoding.Keyframes",
+            "version": "10.11.0"
           },
           {
-            "name": "BlurHashSharp",
-            "version": "1.4.0-pre.1"
-          },
-          {
-            "name": "BlurHashSharp.SkiaSharp",
-            "version": "1.4.0-pre.1"
-          },
-          {
-            "name": "SkiaSharp",
-            "version": "3.116.1"
-          },
-          {
-            "name": "SkiaSharp.HarfBuzz",
-            "version": "3.116.1"
-          },
-          {
-            "name": "Svg.Skia",
-            "version": "3.2.1"
+            "name": "NEbml",
+            "version": "1.1.0.5"
           },
           {
             "name": "AsyncKeyedLock",
@@ -702,6 +722,14 @@
           {
             "name": "BitFaster.Caching",
             "version": "2.5.4"
+          },
+          {
+            "name": "BlurHashSharp",
+            "version": "1.4.0-pre.1"
+          },
+          {
+            "name": "BlurHashSharp.SkiaSharp",
+            "version": "1.4.0-pre.1"
           },
           {
             "name": "CommandLineParser",
@@ -816,10 +844,6 @@
             "version": "5.0.1.631"
           },
           {
-            "name": "NEbml",
-            "version": "1.1.0.5"
-          },
-          {
             "name": "Newtonsoft.Json",
             "version": "13.0.4"
           },
@@ -904,11 +928,23 @@
             "version": "3.2.1"
           },
           {
+            "name": "SkiaSharp",
+            "version": "3.116.1"
+          },
+          {
+            "name": "SkiaSharp.HarfBuzz",
+            "version": "3.116.1"
+          },
+          {
             "name": "Svg.Custom",
             "version": "3.2.1"
           },
           {
             "name": "Svg.Model",
+            "version": "3.2.1"
+          },
+          {
+            "name": "Svg.Skia",
             "version": "3.2.1"
           },
           {
@@ -1003,7 +1039,7 @@
         "rust": []
       },
       "summary": {
-        "freebsd": 164,
+        "freebsd": 173,
         "dotnet": 77,
         "go": 0,
         "java": 0,
@@ -1012,14 +1048,14 @@
         "python": 3,
         "ruby": 0,
         "rust": 0,
-        "total": 245
+        "total": 254
       }
     },
     "pkg": {
       "arch": "amd64",
       "app_version": "10.11.5",
       "source": "pkg",
-      "generated": "2026-03-08T00:23:44Z",
+      "generated": "2026-03-28T16:28:08Z",
       "packages": {
         "freebsd": [
           {
@@ -1152,7 +1188,7 @@
           },
           {
             "name": "aom",
-            "version": "3.13.1"
+            "version": "3.13.2"
           },
           {
             "name": "bash",
@@ -1231,6 +1267,10 @@
             "version": "2.84.4,2"
           },
           {
+            "name": "gmmlib",
+            "version": "22.5.4"
+          },
+          {
             "name": "gmp",
             "version": "6.3.0"
           },
@@ -1303,6 +1343,10 @@
             "version": "1.0.12"
           },
           {
+            "name": "libXdamage",
+            "version": "1.1.6"
+          },
+          {
             "name": "libXdmcp",
             "version": "1.1.5"
           },
@@ -1329,6 +1373,10 @@
           {
             "name": "libXv",
             "version": "1.0.13,1"
+          },
+          {
+            "name": "libXxf86vm",
+            "version": "1.1.6"
           },
           {
             "name": "libass",
@@ -1463,6 +1511,10 @@
             "version": "2.23.0"
           },
           {
+            "name": "libva-intel-media-driver",
+            "version": "23.4.3_1"
+          },
+          {
             "name": "libvdpau",
             "version": "1.5"
           },
@@ -1487,8 +1539,20 @@
             "version": "2.15.2"
           },
           {
+            "name": "libxshmfence",
+            "version": "1.3.3"
+          },
+          {
             "name": "libzen",
             "version": "0.4.41.25.10,3"
+          },
+          {
+            "name": "llvm19",
+            "version": "19.1.7_1"
+          },
+          {
+            "name": "lua53",
+            "version": "5.3.6_1"
           },
           {
             "name": "lzo2",
@@ -1497,6 +1561,10 @@
           {
             "name": "mediainfo",
             "version": "25.10"
+          },
+          {
+            "name": "mesa-gallium-va",
+            "version": "24.1.7"
           },
           {
             "name": "mpc",
@@ -1545,6 +1613,10 @@
           {
             "name": "pcre2",
             "version": "10.47_1"
+          },
+          {
+            "name": "perl5",
+            "version": "5.42.0_1"
           },
           {
             "name": "pixman",
@@ -1681,12 +1753,20 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Database.Providers.Sqlite",
+            "name": "Jellyfin.Api",
             "version": "1.0.0"
           },
           {
-            "name": "Microsoft.EntityFrameworkCore.Relational",
+            "name": "Microsoft.AspNetCore.Authorization",
             "version": "9.0.11"
+          },
+          {
+            "name": "Microsoft.Extensions.Http",
+            "version": "9.0.11"
+          },
+          {
+            "name": "Swashbuckle.AspNetCore.ReDoc",
+            "version": "6.5.0"
           },
           {
             "name": "AsyncKeyedLock",
@@ -1781,10 +1861,6 @@
             "version": "6.1.0"
           },
           {
-            "name": "Microsoft.AspNetCore.Authorization",
-            "version": "9.0.11"
-          },
-          {
             "name": "Microsoft.AspNetCore.Metadata",
             "version": "9.0.11"
           },
@@ -1798,6 +1874,10 @@
           },
           {
             "name": "Microsoft.EntityFrameworkCore.Abstractions",
+            "version": "9.0.11"
+          },
+          {
+            "name": "Microsoft.EntityFrameworkCore.Relational",
             "version": "9.0.11"
           },
           {
@@ -1882,10 +1962,6 @@
           },
           {
             "name": "Microsoft.Extensions.Hosting.Abstractions",
-            "version": "9.0.11"
-          },
-          {
-            "name": "Microsoft.Extensions.Http",
             "version": "9.0.11"
           },
           {
@@ -2029,10 +2105,6 @@
             "version": "3.2.1"
           },
           {
-            "name": "Swashbuckle.AspNetCore.ReDoc",
-            "version": "6.5.0"
-          },
-          {
             "name": "Swashbuckle.AspNetCore.Swagger",
             "version": "6.2.3"
           },
@@ -2132,7 +2204,7 @@
         "rust": []
       },
       "summary": {
-        "freebsd": 164,
+        "freebsd": 173,
         "dotnet": 106,
         "go": 0,
         "java": 0,
@@ -2141,7 +2213,7 @@
         "python": 3,
         "ruby": 0,
         "rust": 0,
-        "total": 274
+        "total": 283
       }
     }
   }
