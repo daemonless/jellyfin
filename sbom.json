@@ -1,12 +1,12 @@
 {
   "image": "jellyfin",
-  "generated": "2026-03-28T16:30:48Z",
+  "generated": "2026-03-28T20:51:44Z",
   "tags": {
     "pkg-latest": {
       "arch": "amd64",
       "app_version": "10.11.6",
       "source": "pkg",
-      "generated": "2026-03-28T16:29:03Z",
+      "generated": "2026-03-28T20:51:34Z",
       "packages": {
         "freebsd": [
           {
@@ -704,12 +704,12 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.MediaEncoding.Keyframes",
-            "version": "10.11.0"
+            "name": "Jellyfin.Controller",
+            "version": "10.11.6"
           },
           {
-            "name": "NEbml",
-            "version": "1.1.0.5"
+            "name": "BitFaster.Caching",
+            "version": "2.5.4"
           },
           {
             "name": "AsyncKeyedLock",
@@ -718,10 +718,6 @@
           {
             "name": "BDInfo",
             "version": "0.8.0"
-          },
-          {
-            "name": "BitFaster.Caching",
-            "version": "2.5.4"
           },
           {
             "name": "BlurHashSharp",
@@ -842,6 +838,10 @@
           {
             "name": "Morestachio",
             "version": "5.0.1.631"
+          },
+          {
+            "name": "NEbml",
+            "version": "1.1.0.5"
           },
           {
             "name": "Newtonsoft.Json",
@@ -1055,7 +1055,7 @@
       "arch": "amd64",
       "app_version": "10.11.5",
       "source": "pkg",
-      "generated": "2026-03-28T16:28:08Z",
+      "generated": "2026-03-28T20:51:20Z",
       "packages": {
         "freebsd": [
           {
@@ -1753,20 +1753,16 @@
         ],
         "dotnet": [
           {
-            "name": "Jellyfin.Api",
-            "version": "1.0.0"
+            "name": "Jellyfin.Database.Implementations",
+            "version": "10.11.0"
           },
           {
-            "name": "Microsoft.AspNetCore.Authorization",
+            "name": "Microsoft.EntityFrameworkCore.Relational",
             "version": "9.0.11"
           },
           {
-            "name": "Microsoft.Extensions.Http",
-            "version": "9.0.11"
-          },
-          {
-            "name": "Swashbuckle.AspNetCore.ReDoc",
-            "version": "6.5.0"
+            "name": "Polly",
+            "version": "8.6.5"
           },
           {
             "name": "AsyncKeyedLock",
@@ -1861,6 +1857,10 @@
             "version": "6.1.0"
           },
           {
+            "name": "Microsoft.AspNetCore.Authorization",
+            "version": "9.0.11"
+          },
+          {
             "name": "Microsoft.AspNetCore.Metadata",
             "version": "9.0.11"
           },
@@ -1874,10 +1874,6 @@
           },
           {
             "name": "Microsoft.EntityFrameworkCore.Abstractions",
-            "version": "9.0.11"
-          },
-          {
-            "name": "Microsoft.EntityFrameworkCore.Relational",
             "version": "9.0.11"
           },
           {
@@ -1965,6 +1961,10 @@
             "version": "9.0.11"
           },
           {
+            "name": "Microsoft.Extensions.Http",
+            "version": "9.0.11"
+          },
+          {
             "name": "Microsoft.Extensions.Logging",
             "version": "9.0.11"
           },
@@ -2007,10 +2007,6 @@
           {
             "name": "PlaylistsNET",
             "version": "1.4.1"
-          },
-          {
-            "name": "Polly",
-            "version": "8.6.5"
           },
           {
             "name": "Polly.Core",
@@ -2103,6 +2099,10 @@
           {
             "name": "Svg.Skia",
             "version": "3.2.1"
+          },
+          {
+            "name": "Swashbuckle.AspNetCore.ReDoc",
+            "version": "6.5.0"
           },
           {
             "name": "Swashbuckle.AspNetCore.Swagger",
