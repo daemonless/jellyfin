@@ -5,11 +5,37 @@
 # --------------------------------------------------------------------------
 
 ARG BASE_VERSION=15
+
+# Stage 1: Build jellyfin-ffmpeg
+FROM ghcr.io/daemonless/base:${BASE_VERSION} AS jffmpeg-builder
+
+RUN pkg update && pkg install -y \
+    FreeBSD-bmake FreeBSD-clibs-dev FreeBSD-clang FreeBSD-clang-dev FreeBSD-toolchain FreeBSD-utilities-dev FreeBSD-runtime-dev FreeBSD-zlib-dev FreeBSD-bzip2-dev FreeBSD-openssl-dev FreeBSD-xz-dev nasm vulkan-headers quilt pkgconf gmake perl5 \
+    libass libbluray chromaprint dav1d fdk-aac fontconfig freetype2 fribidi gmp harfbuzz lame libopenmpt opus libplacebo shaderc svt-av1 libtheora libvorbis libvpx vulkan-loader webp libx264 x265 sekrit-twc-zimg libzvbi gnutls libxml2 libiconv libva libdrm libvdpau libX11 alsa-lib sndio \
+    && pkg clean -ay
+
+RUN pkg install -y git && \
+    fetch -qo /tmp/ports.tar.zst \
+    "https://download.freebsd.org/ports/ports/ports.tar.zst" && \
+    mkdir -p /usr/ports/multimedia && \
+    tar -xf /tmp/ports.tar.zst -C /usr/ports --strip-components=1 \
+        ports/Mk ports/Templates ports/Keywords && \
+    rm /tmp/ports.tar.zst && \
+    git clone --depth=1 https://github.com/daemonless/freebsd-ports.git /tmp/freebsd-ports && \
+    cp -r /tmp/freebsd-ports/multimedia/jellyfin-ffmpeg /usr/ports/multimedia/ && \
+    rm -rf /tmp/freebsd-ports
+
+WORKDIR /usr/ports/multimedia/jellyfin-ffmpeg
+RUN make BATCH=yes MAKE_JOBS_NUMBER=4 install clean
+RUN mkdir -p /tmp/packages && pkg create -o /tmp/packages/ jellyfin-ffmpeg
+
+# Stage 2: Final Production Image
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
-ARG PACKAGES="${PKG_NAME} libva libva-intel-media-driver gmmlib mesa-gallium-va"
+# Runtime dependencies for jellyfin and both ffmpeg variants
+ARG PACKAGES="${PKG_NAME} ffmpeg libva libva-intel-media-driver gmmlib mesa-gallium-va libass libbluray chromaprint dav1d fdk-aac fontconfig freetype2 fribidi gmp harfbuzz lame libopenmpt opus libplacebo shaderc svt-av1 libtheora libvorbis libvpx vulkan-loader webp libx264 x265 sekrit-twc-zimg libzvbi gnutls libxml2 libiconv libva libdrm libvdpau libX11 alsa-lib sndio"
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 ARG HEALTHCHECK_ENDPOINT="http://localhost:8096/health"
@@ -44,6 +70,11 @@ RUN pkg update && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
+
+# Install jellyfin-ffmpeg from the builder stage
+COPY --from=jffmpeg-builder /tmp/packages/jellyfin-ffmpeg-*.pkg /tmp/
+RUN pkg add -f /tmp/jellyfin-ffmpeg-*.pkg && \
+    rm /tmp/jellyfin-ffmpeg-*.pkg
 
 # Copy service definition and init scripts
 COPY root/ /

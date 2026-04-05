@@ -13,6 +13,22 @@ x-daemonless:
   upstream_binary: false
   appjail: true
   notes: |
+    ## FFmpeg vs. Jellyfin-FFmpeg
+
+    This image includes both standard `ffmpeg` and `jellyfin-ffmpeg`. By default,
+    it uses `jellyfin-ffmpeg` (via the `FFMPEG_PATH` environment variable).
+
+    **Why use jellyfin-ffmpeg?**
+    While raw encoding performance is similar, `jellyfin-ffmpeg` includes critical
+    patches for **HDR to SDR tone mapping** (specifically the `tonemapx` filter).
+    Stock FFmpeg lacks a proper BT.2390 implementation, which results in "washed
+    out" or blown-out colors when serving HDR10 content to SDR displays.
+
+    **Port Status**
+    Note that `jellyfin-ffmpeg` is not currently in the official FreeBSD ports
+    tree, but it is provided in this image to ensure a high-quality transcoding
+    experience identical to the official Jellyfin Linux distributions.
+
     ## Hardware Acceleration (VAAPI)
 
     Intel iGPU hardware transcoding is supported via VAAPI. The image includes
@@ -51,6 +67,7 @@ x-daemonless:
       PUID: "User ID for the application process"
       PGID: "Group ID for the application process"
       TZ: "Timezone for the container"
+      FFMPEG_PATH: "Path to the FFmpeg binary. Options: /usr/local/bin/jellyfin-ffmpeg (default) or /usr/local/bin/ffmpeg"
     volumes:
       /config: "Configuration directory"
       /cache:
@@ -78,6 +95,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
+      - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
 
     volumes:
       - /path/to/containers/jellyfin:/config

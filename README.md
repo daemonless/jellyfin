@@ -42,6 +42,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
+      - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
     volumes:
       - "/path/to/containers/jellyfin:/config"
       - "/path/to/containers/jellyfin/cache:/cache" # optional
@@ -63,6 +64,7 @@ DIRECTOR_PROJECT=jellyfin
 PUID=1000
 PGID=1000
 TZ=UTC
+FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
 ```
 
 **appjail-director.yml**:
@@ -82,6 +84,7 @@ services:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
+        - FFMPEG_PATH: !ENV '${FFMPEG_PATH}'
     volumes:
       - jellyfin: /config
       - jellyfin_cache: /cache
@@ -117,6 +120,7 @@ podman run -d --name jellyfin \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=UTC \
+  -e FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
   -v /path/to/containers/jellyfin:/config \
   -v /path/to/containers/jellyfin/cache:/cache # optional \
   -v /path/to/tv:/tv # optional \
@@ -137,6 +141,7 @@ podman run -d --name jellyfin \
       PUID: "1000"
       PGID: "1000"
       TZ: "UTC"
+      FFMPEG_PATH: "/usr/local/bin/jellyfin-ffmpeg"
     ports:
       - "8096:8096"
     volumes:
@@ -159,6 +164,7 @@ Access at: `http://localhost:8096`
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
+| `FFMPEG_PATH` | `/usr/local/bin/jellyfin-ffmpeg` | Path to the FFmpeg binary. Options: /usr/local/bin/jellyfin-ffmpeg (default) or /usr/local/bin/ffmpeg |
 
 ### Volumes
 
@@ -174,6 +180,22 @@ Access at: `http://localhost:8096`
 | Port | Protocol | Description |
 |------|----------|-------------|
 | `8096` | TCP | Web UI |
+
+## FFmpeg vs. Jellyfin-FFmpeg
+
+This image includes both standard `ffmpeg` and `jellyfin-ffmpeg`. By default,
+it uses `jellyfin-ffmpeg` (via the `FFMPEG_PATH` environment variable).
+
+**Why use jellyfin-ffmpeg?**
+While raw encoding performance is similar, `jellyfin-ffmpeg` includes critical
+patches for **HDR to SDR tone mapping** (specifically the `tonemapx` filter).
+Stock FFmpeg lacks a proper BT.2390 implementation, which results in "washed
+out" or blown-out colors when serving HDR10 content to SDR displays.
+
+**Port Status**
+Note that `jellyfin-ffmpeg` is not currently in the official FreeBSD ports
+tree, but it is provided in this image to ensure a high-quality transcoding
+experience identical to the official Jellyfin Linux distributions.
 
 ## Hardware Acceleration (VAAPI)
 
