@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-05T16:03:19Z",
+  "generated": "2026-04-05T23:16:09Z",
   "image": "jellyfin",
   "tags": {
     "pkg": {
       "app_version": "10.11.5",
       "arch": "amd64",
-      "generated": "2026-04-05T16:02:05Z",
+      "generated": "2026-04-05T23:14:56Z",
       "packages": {
         "dotnet": [
           {
@@ -81,8 +81,8 @@
             "version": "2.0.0"
           },
           {
-            "name": "Jellyfin.Api",
-            "version": "1.0.0"
+            "name": "Jellyfin.Data",
+            "version": "10.11.5"
           },
           {
             "name": "Jellyfin.XmlTv",
@@ -563,6 +563,10 @@
             "version": "3.2.2_2"
           },
           {
+            "name": "alsa-lib",
+            "version": "1.2.14"
+          },
+          {
             "name": "aom",
             "version": "3.13.2"
           },
@@ -591,6 +595,10 @@
             "version": "1.18.2,3"
           },
           {
+            "name": "chromaprint",
+            "version": "1.6.0_1"
+          },
+          {
             "name": "curl",
             "version": "8.17.0"
           },
@@ -607,8 +615,16 @@
             "version": "2.7.4"
           },
           {
+            "name": "fdk-aac",
+            "version": "2.0.3"
+          },
+          {
             "name": "ffmpeg",
             "version": "8.0.1_1,1"
+          },
+          {
+            "name": "flac",
+            "version": "1.5.0,1"
           },
           {
             "name": "fontconfig",
@@ -685,6 +701,10 @@
           {
             "name": "jellyfin",
             "version": "10.11.5"
+          },
+          {
+            "name": "jellyfin-ffmpeg",
+            "version": "7.1.3.5"
           },
           {
             "name": "jpeg-turbo",
@@ -827,6 +847,10 @@
             "version": "1.3.6,4"
           },
           {
+            "name": "libopenmpt",
+            "version": "0.8.4"
+          },
+          {
             "name": "libpciaccess",
             "version": "0.18.1_1"
           },
@@ -847,6 +871,10 @@
             "version": "116_3"
           },
           {
+            "name": "libsndfile",
+            "version": "1.2.2_2"
+          },
+          {
             "name": "libssh2",
             "version": "1.11.1,3"
           },
@@ -859,6 +887,10 @@
             "version": "0.1.30"
           },
           {
+            "name": "libtheora",
+            "version": "1.2.0_1"
+          },
+          {
             "name": "libudev-devd",
             "version": "0.6.0"
           },
@@ -869,6 +901,10 @@
           {
             "name": "libunibreak",
             "version": "6.1,1"
+          },
+          {
+            "name": "libunicode",
+            "version": "0.4_13"
           },
           {
             "name": "libunistring",
@@ -923,6 +959,10 @@
             "version": "0.4.41.25.10,3"
           },
           {
+            "name": "libzvbi",
+            "version": "0.2.44"
+          },
+          {
             "name": "llvm19",
             "version": "19.1.7_1"
           },
@@ -953,6 +993,10 @@
           {
             "name": "mpfr",
             "version": "4.2.2,1"
+          },
+          {
+            "name": "mpg123",
+            "version": "1.33.4"
           },
           {
             "name": "nettle",
@@ -1007,6 +1051,10 @@
             "version": "1.6.53"
           },
           {
+            "name": "portaudio",
+            "version": "19.6.0_7,1"
+          },
+          {
             "name": "py311-boost-libs",
             "version": "1.89.0"
           },
@@ -1031,6 +1079,10 @@
             "version": "2.13.2.0"
           },
           {
+            "name": "sekrit-twc-zimg",
+            "version": "3.0.6"
+          },
+          {
             "name": "shaderc",
             "version": "2025.5_1"
           },
@@ -1041,6 +1093,10 @@
           {
             "name": "skalibs",
             "version": "2.14.4.0"
+          },
+          {
+            "name": "sndio",
+            "version": "1.10.0_1"
           },
           {
             "name": "sqlite3",
@@ -1152,7 +1208,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 106,
-        "freebsd": 172,
+        "freebsd": 186,
         "go": 0,
         "java": 0,
         "node": 1,
@@ -1160,13 +1216,13 @@
         "python": 3,
         "ruby": 0,
         "rust": 0,
-        "total": 282
+        "total": 296
       }
     },
     "pkg-latest": {
       "app_version": "10.11.7",
       "arch": "amd64",
-      "generated": "2026-04-05T16:01:29Z",
+      "generated": "2026-04-05T23:14:00Z",
       "packages": {
         "dotnet": [
           {
@@ -1242,16 +1298,16 @@
             "version": "2.0.0"
           },
           {
-            "name": "Jellyfin.MediaEncoding.Hls",
-            "version": "1.0.0"
-          },
-          {
             "name": "Jellyfin.XmlTv",
             "version": "10.8.0"
           },
           {
             "name": "LrcParser",
             "version": "2025.623.0"
+          },
+          {
+            "name": "MediaBrowser.MediaEncoding",
+            "version": "1.0.0"
           },
           {
             "name": "MetaBrainz.Common",
@@ -1605,7 +1661,11 @@
           },
           {
             "name": "Imath",
-            "version": "3.2.2_2"
+            "version": "3.2.2_3"
+          },
+          {
+            "name": "alsa-lib",
+            "version": "1.2.15.3"
           },
           {
             "name": "aom",
@@ -1636,6 +1696,10 @@
             "version": "1.18.2,3"
           },
           {
+            "name": "chromaprint",
+            "version": "1.6.0_1"
+          },
+          {
             "name": "curl",
             "version": "8.19.0_1"
           },
@@ -1652,8 +1716,16 @@
             "version": "2.7.5"
           },
           {
+            "name": "fdk-aac",
+            "version": "2.0.3"
+          },
+          {
             "name": "ffmpeg",
             "version": "8.1,1"
+          },
+          {
+            "name": "flac",
+            "version": "1.5.0,1"
           },
           {
             "name": "fontconfig",
@@ -1730,6 +1802,10 @@
           {
             "name": "jellyfin",
             "version": "10.11.7"
+          },
+          {
+            "name": "jellyfin-ffmpeg",
+            "version": "7.1.3.5"
           },
           {
             "name": "jpeg-turbo",
@@ -1872,6 +1948,10 @@
             "version": "1.3.6,4"
           },
           {
+            "name": "libopenmpt",
+            "version": "0.8.4"
+          },
+          {
             "name": "libpciaccess",
             "version": "0.18.1_1"
           },
@@ -1892,6 +1972,10 @@
             "version": "116_3"
           },
           {
+            "name": "libsndfile",
+            "version": "1.2.2_2"
+          },
+          {
             "name": "libssh2",
             "version": "1.11.1,3"
           },
@@ -1904,6 +1988,10 @@
             "version": "0.1.30"
           },
           {
+            "name": "libtheora",
+            "version": "1.2.0_1"
+          },
+          {
             "name": "libudev-devd",
             "version": "0.6.0"
           },
@@ -1914,6 +2002,10 @@
           {
             "name": "libunibreak",
             "version": "6.1,1"
+          },
+          {
+            "name": "libunicode",
+            "version": "0.4_13"
           },
           {
             "name": "libunistring",
@@ -1968,6 +2060,10 @@
             "version": "0.4.41.26.01,3"
           },
           {
+            "name": "libzvbi",
+            "version": "0.2.44_1"
+          },
+          {
             "name": "llvm19",
             "version": "19.1.7_1"
           },
@@ -1998,6 +2094,10 @@
           {
             "name": "mpfr",
             "version": "4.2.2,1"
+          },
+          {
+            "name": "mpg123",
+            "version": "1.33.4"
           },
           {
             "name": "nettle",
@@ -2052,12 +2152,16 @@
             "version": "1.6.55"
           },
           {
+            "name": "portaudio",
+            "version": "19.6.0_7,1"
+          },
+          {
             "name": "py311-boost-libs",
             "version": "1.89.0"
           },
           {
-            "name": "py311-numpy",
-            "version": "1.26.4_12,1"
+            "name": "py311-numpy1",
+            "version": "1.26.4_1"
           },
           {
             "name": "py311-packaging",
@@ -2076,6 +2180,10 @@
             "version": "2.14.0.1"
           },
           {
+            "name": "sekrit-twc-zimg",
+            "version": "3.0.6"
+          },
+          {
             "name": "shaderc",
             "version": "2026.1"
           },
@@ -2088,40 +2196,16 @@
             "version": "2.14.5.1"
           },
           {
+            "name": "sndio",
+            "version": "1.10.0_1"
+          },
+          {
             "name": "sqlite3",
             "version": "3.50.4_2,1"
           },
           {
             "name": "srt",
             "version": "1.5.4"
-          },
-          {
-            "name": "suitesparse-amd",
-            "version": "3.3.4"
-          },
-          {
-            "name": "suitesparse-camd",
-            "version": "3.3.5"
-          },
-          {
-            "name": "suitesparse-ccolamd",
-            "version": "3.3.5"
-          },
-          {
-            "name": "suitesparse-cholmod",
-            "version": "5.3.4"
-          },
-          {
-            "name": "suitesparse-colamd",
-            "version": "3.3.5"
-          },
-          {
-            "name": "suitesparse-config",
-            "version": "7.12.2"
-          },
-          {
-            "name": "suitesparse-umfpack",
-            "version": "6.3.7"
           },
           {
             "name": "svt-av1",
@@ -2197,7 +2281,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 77,
-        "freebsd": 172,
+        "freebsd": 179,
         "go": 0,
         "java": 0,
         "node": 1,
@@ -2205,7 +2289,7 @@
         "python": 3,
         "ruby": 0,
         "rust": 0,
-        "total": 253
+        "total": 260
       }
     }
   }
