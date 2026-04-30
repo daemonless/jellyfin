@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-18T00:27:20Z",
+  "generated": "2026-04-30T12:49:29Z",
   "image": "jellyfin",
   "tags": {
     "pkg": {
       "app_version": "10.11.7",
       "arch": "amd64",
-      "generated": "2026-04-18T00:26:10Z",
+      "generated": "2026-04-30T12:44:38Z",
       "packages": {
         "dotnet": [
           {
@@ -79,10 +79,6 @@
           {
             "name": "J2N",
             "version": "2.0.0"
-          },
-          {
-            "name": "Jellyfin.Networking",
-            "version": "1.0.0"
           },
           {
             "name": "Jellyfin.XmlTv",
@@ -293,6 +289,10 @@
             "version": "1.2.0"
           },
           {
+            "name": "jellyfin",
+            "version": "1.0.0"
+          },
+          {
             "name": "libse",
             "version": "4.0.12"
           },
@@ -396,11 +396,11 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
@@ -412,7 +412,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0"
+            "version": "15.0p6"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -484,7 +484,7 @@
           },
           {
             "name": "curl",
-            "version": "8.19.0_1"
+            "version": "8.19.0_2"
           },
           {
             "name": "dav1d",
@@ -588,7 +588,7 @@
           },
           {
             "name": "jellyfin-ffmpeg",
-            "version": "7.1.3.5"
+            "version": "7.1.3.6"
           },
           {
             "name": "jpeg-turbo",
@@ -608,7 +608,7 @@
           },
           {
             "name": "lcms2",
-            "version": "2.18"
+            "version": "2.19"
           },
           {
             "name": "lerc",
@@ -724,7 +724,7 @@
           },
           {
             "name": "libnghttp2",
-            "version": "1.68.0"
+            "version": "1.68.1"
           },
           {
             "name": "libogg",
@@ -1106,7 +1106,7 @@
     "pkg-latest": {
       "app_version": "10.11.8",
       "arch": "amd64",
-      "generated": "2026-04-18T00:26:03Z",
+      "generated": "2026-04-30T12:48:13Z",
       "packages": {
         "dotnet": [
           {
@@ -1182,8 +1182,8 @@
             "version": "2.0.0"
           },
           {
-            "name": "Jellyfin.LiveTv",
-            "version": "1.0.0"
+            "name": "Jellyfin.Controller",
+            "version": "10.11.8"
           },
           {
             "name": "Jellyfin.XmlTv",
@@ -1497,11 +1497,11 @@
           },
           {
             "name": "FreeBSD-openssl",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-openssl-lib",
-            "version": "15.0"
+            "version": "15.0p2"
           },
           {
             "name": "FreeBSD-pkg-bootstrap",
@@ -1513,7 +1513,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0"
+            "version": "15.0p6"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1597,7 +1597,7 @@
           },
           {
             "name": "expat",
-            "version": "2.7.5"
+            "version": "2.8.0"
           },
           {
             "name": "fdk-aac",
@@ -1665,7 +1665,7 @@
           },
           {
             "name": "highway",
-            "version": "1.3.0"
+            "version": "1.4.0"
           },
           {
             "name": "hwdata",
@@ -1689,7 +1689,7 @@
           },
           {
             "name": "jellyfin-ffmpeg",
-            "version": "7.1.3.5"
+            "version": "7.1.3.6"
           },
           {
             "name": "jpeg-turbo",
@@ -1709,7 +1709,7 @@
           },
           {
             "name": "lcms2",
-            "version": "2.18"
+            "version": "2.19"
           },
           {
             "name": "lerc",
@@ -1717,7 +1717,7 @@
           },
           {
             "name": "libX11",
-            "version": "1.8.13,1"
+            "version": "1.8.13_1,1"
           },
           {
             "name": "libXau",
@@ -1825,7 +1825,7 @@
           },
           {
             "name": "libnghttp2",
-            "version": "1.68.1"
+            "version": "1.69.0"
           },
           {
             "name": "libogg",
@@ -1849,7 +1849,7 @@
           },
           {
             "name": "librsvg2-rust",
-            "version": "2.62.0_1"
+            "version": "2.62.0_2"
           },
           {
             "name": "libskiasharp",
@@ -1857,7 +1857,7 @@
           },
           {
             "name": "libsndfile",
-            "version": "1.2.2_2"
+            "version": "1.2.2.20251216"
           },
           {
             "name": "libssh2",
@@ -1885,7 +1885,7 @@
           },
           {
             "name": "libunibreak",
-            "version": "6.1,1"
+            "version": "7.0,1"
           },
           {
             "name": "libunicode",
@@ -1933,7 +1933,7 @@
           },
           {
             "name": "libxml2",
-            "version": "2.15.2_1"
+            "version": "2.15.3"
           },
           {
             "name": "libxshmfence",
@@ -1957,7 +1957,7 @@
           },
           {
             "name": "lzo2",
-            "version": "2.10_1"
+            "version": "2.10_2"
           },
           {
             "name": "mediainfo",
@@ -1969,7 +1969,7 @@
           },
           {
             "name": "mpc",
-            "version": "1.4.0"
+            "version": "1.4.1"
           },
           {
             "name": "mpdecimal",
@@ -1981,7 +1981,7 @@
           },
           {
             "name": "mpg123",
-            "version": "1.33.4"
+            "version": "1.33.5"
           },
           {
             "name": "nettle",
@@ -1997,11 +1997,11 @@
           },
           {
             "name": "openexr",
-            "version": "3.4.9"
+            "version": "3.4.10_1"
           },
           {
             "name": "openjph",
-            "version": "0.26.3"
+            "version": "0.27.0"
           },
           {
             "name": "opus",
@@ -2029,11 +2029,11 @@
           },
           {
             "name": "pkg",
-            "version": "2.7.3"
+            "version": "2.7.4"
           },
           {
             "name": "png",
-            "version": "1.6.57"
+            "version": "1.6.58"
           },
           {
             "name": "portaudio",
@@ -2049,7 +2049,7 @@
           },
           {
             "name": "py311-packaging",
-            "version": "26.0"
+            "version": "26.1"
           },
           {
             "name": "python311",
@@ -2156,7 +2156,7 @@
           },
           {
             "name": "packaging",
-            "version": "26.0"
+            "version": "26.1"
           }
         ],
         "ruby": [],
