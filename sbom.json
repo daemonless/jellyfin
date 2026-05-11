@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-30T12:49:29Z",
+  "generated": "2026-05-11T23:38:52Z",
   "image": "jellyfin",
   "tags": {
     "pkg": {
       "app_version": "10.11.7",
       "arch": "amd64",
-      "generated": "2026-04-30T12:44:38Z",
+      "generated": "2026-05-11T23:37:37Z",
       "packages": {
         "dotnet": [
           {
@@ -79,6 +79,10 @@
           {
             "name": "J2N",
             "version": "2.0.0"
+          },
+          {
+            "name": "Jellyfin.Data",
+            "version": "10.11.7"
           },
           {
             "name": "Jellyfin.XmlTv",
@@ -289,10 +293,6 @@
             "version": "1.2.0"
           },
           {
-            "name": "jellyfin",
-            "version": "1.0.0"
-          },
-          {
             "name": "libse",
             "version": "4.0.12"
           },
@@ -412,7 +412,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p6"
+            "version": "15.0p8"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -440,7 +440,7 @@
           },
           {
             "name": "FreeBSD-zoneinfo",
-            "version": "15.0"
+            "version": "15.0p7"
           },
           {
             "name": "Imath",
@@ -484,7 +484,7 @@
           },
           {
             "name": "curl",
-            "version": "8.19.0_2"
+            "version": "8.20.0"
           },
           {
             "name": "dav1d",
@@ -552,7 +552,7 @@
           },
           {
             "name": "gnutls",
-            "version": "3.8.12"
+            "version": "3.8.13"
           },
           {
             "name": "graphite2",
@@ -896,7 +896,7 @@
           },
           {
             "name": "openexr",
-            "version": "3.4.9"
+            "version": "3.4.11"
           },
           {
             "name": "openjph",
@@ -1106,7 +1106,7 @@
     "pkg-latest": {
       "app_version": "10.11.8",
       "arch": "amd64",
-      "generated": "2026-04-30T12:48:13Z",
+      "generated": "2026-05-11T23:35:47Z",
       "packages": {
         "dotnet": [
           {
@@ -1182,8 +1182,8 @@
             "version": "2.0.0"
           },
           {
-            "name": "Jellyfin.Controller",
-            "version": "10.11.8"
+            "name": "Jellyfin.Drawing.Skia",
+            "version": "1.0.0"
           },
           {
             "name": "Jellyfin.XmlTv",
@@ -1513,7 +1513,7 @@
           },
           {
             "name": "FreeBSD-runtime",
-            "version": "15.0p6"
+            "version": "15.0p8"
           },
           {
             "name": "FreeBSD-tcpd",
@@ -1541,11 +1541,11 @@
           },
           {
             "name": "FreeBSD-zoneinfo",
-            "version": "15.0"
+            "version": "15.0p7"
           },
           {
             "name": "Imath",
-            "version": "3.2.2_3"
+            "version": "3.2.2_4"
           },
           {
             "name": "alsa-lib",
@@ -1585,7 +1585,7 @@
           },
           {
             "name": "curl",
-            "version": "8.19.0_2"
+            "version": "8.20.0"
           },
           {
             "name": "dav1d",
@@ -1641,7 +1641,7 @@
           },
           {
             "name": "glib",
-            "version": "2.84.4,2"
+            "version": "2.86.4,2"
           },
           {
             "name": "gmmlib",
@@ -1653,7 +1653,7 @@
           },
           {
             "name": "gnutls",
-            "version": "3.8.12"
+            "version": "3.8.13"
           },
           {
             "name": "graphite2",
@@ -1669,7 +1669,7 @@
           },
           {
             "name": "hwdata",
-            "version": "0.406,1"
+            "version": "0.407,1"
           },
           {
             "name": "icu",
@@ -1701,7 +1701,7 @@
           },
           {
             "name": "krb5",
-            "version": "1.22.1"
+            "version": "1.22.2"
           },
           {
             "name": "lame",
@@ -1709,7 +1709,7 @@
           },
           {
             "name": "lcms2",
-            "version": "2.19"
+            "version": "2.19.1"
           },
           {
             "name": "lerc",
@@ -1725,7 +1725,7 @@
           },
           {
             "name": "libXdamage",
-            "version": "1.1.6"
+            "version": "1.1.7"
           },
           {
             "name": "libXdmcp",
@@ -1757,7 +1757,7 @@
           },
           {
             "name": "libXxf86vm",
-            "version": "1.1.6"
+            "version": "1.1.7"
           },
           {
             "name": "libass",
@@ -1837,7 +1837,7 @@
           },
           {
             "name": "libpciaccess",
-            "version": "0.18.1_1"
+            "version": "0.19"
           },
           {
             "name": "libplacebo",
@@ -1997,7 +1997,7 @@
           },
           {
             "name": "openexr",
-            "version": "3.4.10_1"
+            "version": "3.4.11"
           },
           {
             "name": "openjph",
@@ -2025,11 +2025,11 @@
           },
           {
             "name": "pixman",
-            "version": "0.46.2"
+            "version": "0.46.4"
           },
           {
             "name": "pkg",
-            "version": "2.7.4"
+            "version": "2.7.5"
           },
           {
             "name": "png",
@@ -2044,12 +2044,12 @@
             "version": "1.89.0"
           },
           {
-            "name": "py311-numpy1",
-            "version": "1.26.4_3"
+            "name": "py311-numpy",
+            "version": "2.4.4_2,1"
           },
           {
             "name": "py311-packaging",
-            "version": "26.1"
+            "version": "26.2"
           },
           {
             "name": "python311",
@@ -2069,7 +2069,7 @@
           },
           {
             "name": "shaderc",
-            "version": "2026.1"
+            "version": "2026.2"
           },
           {
             "name": "shared-mime-info",
@@ -2109,7 +2109,7 @@
           },
           {
             "name": "vulkan-loader",
-            "version": "1.4.336"
+            "version": "1.4.350"
           },
           {
             "name": "wayland",
@@ -2125,7 +2125,7 @@
           },
           {
             "name": "xorgproto",
-            "version": "2024.1"
+            "version": "2025.1"
           },
           {
             "name": "xxhash",
@@ -2140,8 +2140,48 @@
         "java": [],
         "node": [
           {
+            "name": "@jupyterlite/app",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-consoles",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-edit",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-lab",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-notebooks",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-repl",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/app-tree",
+            "version": "0.5.1"
+          },
+          {
+            "name": "@jupyterlite/pyodide-kernel-extension",
+            "version": "0.5.2"
+          },
+          {
             "name": "MathJax-grunt-cleaner",
             "version": "0.1.0"
+          },
+          {
+            "name": "jupyterlab-jupytext",
+            "version": "1.4.5"
+          },
+          {
+            "name": "jupyterlab_pygments",
+            "version": "0.3.0"
           }
         ],
         "php": [],
@@ -2152,11 +2192,11 @@
           },
           {
             "name": "numpy",
-            "version": "1.26.4"
+            "version": "2.4.4"
           },
           {
             "name": "packaging",
-            "version": "26.1"
+            "version": "26.2"
           }
         ],
         "ruby": [],
@@ -2168,12 +2208,12 @@
         "freebsd": 179,
         "go": 0,
         "java": 0,
-        "node": 1,
+        "node": 11,
         "php": 0,
         "python": 3,
         "ruby": 0,
         "rust": 0,
-        "total": 260
+        "total": 270
       }
     }
   }
