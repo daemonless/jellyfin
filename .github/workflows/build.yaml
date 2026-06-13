@@ -13,5 +13,4 @@ jobs:
     uses: daemonless/dbuild/.github/workflows/daemonless-build.yaml@main
     with:
       image_name: jellyfin
-      build_tools_ref: freebsd-15.0-20260511
     secrets: inherit

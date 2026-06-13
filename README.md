@@ -22,8 +22,7 @@ Volunteer-built media solution that puts you in control — stream to any device
 
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
-| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `latest` | **FreeBSD Port**. Built from latest FreeBSD packages. | Most users. Matches Linux Docker behavior. |
 
 ## Prerequisites
 
@@ -152,8 +151,6 @@ podman run -d --name jellyfin \
     annotation:
       org.freebsd.jail.allow.mlock: "true"
 ```
-
-Access at: `http://localhost:8096`
 
 ## Parameters
 
