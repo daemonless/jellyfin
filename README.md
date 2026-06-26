@@ -19,13 +19,12 @@ Volunteer-built media solution that puts you in control — stream to any device
 | **Website** | [https://jellyfin.org/](https://jellyfin.org/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` | **FreeBSD Port**. Built from latest FreeBSD packages. | Most users. Matches Linux Docker behavior. |
+| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -35,30 +34,31 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   jellyfin:
-    image: ghcr.io/daemonless/jellyfin:latest
+    image: "ghcr.io/daemonless/jellyfin:latest"
     container_name: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=UTC
-      - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
+      - PUID=1000  # User ID for the application process
+      - PGID=1000  # Group ID for the application process
+      - TZ=UTC  # Timezone for the container
+      - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg  # Path to the FFmpeg binary. Options: /usr/local/bin/jellyfin-ffmpeg (default) or /usr/local/bin/ffmpeg
     volumes:
       - "/path/to/containers/jellyfin:/config"
       - "/path/to/containers/jellyfin/cache:/cache" # optional
       - "/path/to/tv:/tv" # optional
       - "/path/to/movies:/movies" # optional
     ports:
-      - 8096:8096
+      - "8096:8096"
     annotations:
       org.freebsd.jail.allow.mlock: "true"
     restart: unless-stopped
 ```
 
 ### AppJail Director
-
 **.env**:
 
 ```
+# .env
+
 DIRECTOR_PROJECT=jellyfin
 PUID=1000
 PGID=1000
@@ -69,6 +69,8 @@ FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
 **appjail-director.yml**:
 
 ```yaml
+# appjail-director.yml
+
 options:
   - virtualnet: ':<random> default'
   - nat:
@@ -77,6 +79,7 @@ services:
     name: jellyfin
     options:
       - container: 'boot args:--pull'
+      - expose: '8096:8096 proto:tcp' \
     oci:
       user: root
       environment:
@@ -103,12 +106,15 @@ volumes:
 **Makejail**:
 
 ```
+# Makejail
+
 ARG tag=latest
 
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/jellyfin:${tag}
 SET allow.mlock=1
 ```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
 
@@ -127,13 +133,34 @@ podman run -d --name jellyfin \
   ghcr.io/daemonless/jellyfin:latest
 ```
 
+### AppJail
+
+```bash
+appjail oci run -Pd \
+  -o overwrite=force \
+  -o container="args:--pull" \
+  -o virtualnet=":<random> default" \
+  -o nat \
+  -o expose="8096:8096 proto:tcp" \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=UTC \
+  -e FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
+  -o fstab="/path/to/containers/jellyfin /config <pseudofs>" \
+  -o fstab="/path/to/containers/jellyfin/cache /cache <pseudofs>" \ # optional
+  -o fstab="/path/to/tv /tv <pseudofs>" \ # optional
+  -o fstab="/path/to/movies /movies <pseudofs>" \ # optional
+  ghcr.io/daemonless/jellyfin:latest jellyfin
+```
+**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
 ### Ansible
 
 ```yaml
 - name: Deploy jellyfin
   containers.podman.podman_container:
     name: jellyfin
-    image: ghcr.io/daemonless/jellyfin:latest
+    image: "ghcr.io/daemonless/jellyfin:latest"
     state: started
     restart_policy: always
     env:
@@ -151,6 +178,8 @@ podman run -d --name jellyfin \
     annotation:
       org.freebsd.jail.allow.mlock: "true"
 ```
+
+Access at: `http://localhost:8096`
 
 ## Parameters
 
@@ -230,7 +259,7 @@ expose the DRI devices into the jail:
 
 **Architectures:** amd64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15.1
 
 ---
 
