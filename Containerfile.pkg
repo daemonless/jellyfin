@@ -22,12 +22,12 @@ RUN pkg install -y git && \
         ports/Mk ports/Templates ports/Keywords && \
     rm /tmp/ports.tar.zst && \
     git clone --depth=1 https://github.com/daemonless/freebsd-ports.git /tmp/freebsd-ports && \
-    cp -r /tmp/freebsd-ports/multimedia/jellyfin-ffmpeg /usr/ports/multimedia/ && \
+    cp -r /tmp/freebsd-ports/multimedia/jellyfin-ffmpeg7 /usr/ports/multimedia/ && \
     rm -rf /tmp/freebsd-ports
 
-WORKDIR /usr/ports/multimedia/jellyfin-ffmpeg
+WORKDIR /usr/ports/multimedia/jellyfin-ffmpeg7
 RUN make BATCH=yes MAKE_JOBS_NUMBER=4 install clean
-RUN mkdir -p /tmp/packages && pkg create -o /tmp/packages/ jellyfin-ffmpeg
+RUN mkdir -p /tmp/packages && pkg create -o /tmp/packages/ jellyfin-ffmpeg7
 
 # Stage 2: Final Production Image
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
@@ -71,10 +71,12 @@ RUN pkg update && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
 
-# Install jellyfin-ffmpeg from the builder stage
-COPY --from=jffmpeg-builder /tmp/packages/jellyfin-ffmpeg-*.pkg /tmp/
-RUN pkg add -f /tmp/jellyfin-ffmpeg-*.pkg && \
-    rm /tmp/jellyfin-ffmpeg-*.pkg
+# Install jellyfin-ffmpeg7 from the builder stage. The port also provides the
+# unversioned /usr/local/bin/jellyfin-ffmpeg alias (what FFMPEG_PATH points at),
+# so nothing here or in the compose/run script is version-pinned.
+COPY --from=jffmpeg-builder /tmp/packages/jellyfin-ffmpeg7-*.pkg /tmp/
+RUN pkg add -f /tmp/jellyfin-ffmpeg7-*.pkg && \
+    rm /tmp/jellyfin-ffmpeg7-*.pkg
 
 # Copy service definition and init scripts
 COPY root/ /
