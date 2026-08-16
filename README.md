@@ -24,8 +24,8 @@ Volunteer-built media solution that puts you in control — stream to any device
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users. Matches Linux Docker behavior. |
-| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users — recommended. |
+| `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
@@ -82,7 +82,7 @@ services:
     name: jellyfin
     options:
       - container: 'boot args:--pull'
-      - expose: '8096:8096 proto:tcp' \
+      - expose: '8096:8096 proto:tcp'
     oci:
       user: root
       environment:
