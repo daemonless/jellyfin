@@ -1,38 +1,12 @@
-{%- set jffmpeg_runtime_deps = "libass libbluray chromaprint dav1d fdk-aac fontconfig freetype2 fribidi gmp harfbuzz lame libopenmpt opus libplacebo shaderc svt-av1 libtheora libvorbis libvpx vulkan-loader webp libx264 x265 sekrit-twc-zimg libzvbi gnutls libxml2 libiconv libva libdrm libvdpau libX11 alsa-lib sndio" -%}
-{%- set jffmpeg_build_tools = "FreeBSD-bmake FreeBSD-clibs-dev FreeBSD-clang FreeBSD-clang-dev FreeBSD-toolchain FreeBSD-utilities-dev FreeBSD-runtime-dev FreeBSD-zlib-dev FreeBSD-bzip2-dev FreeBSD-openssl-dev FreeBSD-xz-dev nasm vulkan-headers quilt pkgconf gmake perl5" -%}
 {%- set va_deps = "libva libva-intel-media-driver gmmlib mesa-dri" -%}
-ARG BASE_VERSION=15.1
+# jellyfin-ffmpeg7 pkg exists only in the latest branch
+ARG BASE_VERSION=15.1-latest
 
-# Stage 1: Build jellyfin-ffmpeg
-FROM ghcr.io/daemonless/base:${BASE_VERSION} AS jffmpeg-builder
-
-RUN pkg update && pkg install -y \
-    {{ jffmpeg_build_tools }} \
-    {{ jffmpeg_runtime_deps }} \
-    && pkg clean -ay
-
-RUN pkg install -y git && \
-    fetch -qo /tmp/ports.tar.zst \
-    "https://download.freebsd.org/ports/ports/ports.tar.zst" && \
-    mkdir -p /usr/ports/multimedia && \
-    tar -xf /tmp/ports.tar.zst -C /usr/ports --strip-components=1 \
-        ports/Mk ports/Templates ports/Keywords && \
-    rm /tmp/ports.tar.zst && \
-    git clone --depth=1 https://github.com/daemonless/freebsd-ports.git /tmp/freebsd-ports && \
-    cp -r /tmp/freebsd-ports/multimedia/jellyfin-ffmpeg7 /usr/ports/multimedia/ && \
-    rm -rf /tmp/freebsd-ports
-
-WORKDIR /usr/ports/multimedia/jellyfin-ffmpeg7
-RUN make BATCH=yes MAKE_JOBS_NUMBER=4 install clean
-RUN mkdir -p /tmp/packages && pkg create -o /tmp/packages/ jellyfin-ffmpeg7
-
-# Stage 2: Final Production Image
 FROM ghcr.io/daemonless/base:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
-# Runtime dependencies for jellyfin and both ffmpeg variants
-ARG PACKAGES="${PKG_NAME} ffmpeg {{ va_deps }} {{ jffmpeg_runtime_deps }}"
+ARG PACKAGES="${PKG_NAME} jellyfin-ffmpeg7 ffmpeg {{ va_deps }}"
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 {%- if ports %}
@@ -77,13 +51,6 @@ RUN pkg update && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
     chown bsd:bsd /config /cache /media
-
-# Install jellyfin-ffmpeg7 from the builder stage. The port also provides the
-# unversioned /usr/local/bin/jellyfin-ffmpeg alias (what FFMPEG_PATH points at),
-# so nothing here or in the compose/run script is version-pinned.
-COPY --from=jffmpeg-builder /tmp/packages/jellyfin-ffmpeg7-*.pkg /tmp/
-RUN pkg add -f /tmp/jellyfin-ffmpeg7-*.pkg && \
-    rm /tmp/jellyfin-ffmpeg7-*.pkg
 
 # Copy service definition and init scripts
 COPY root/ /

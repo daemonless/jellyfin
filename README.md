@@ -11,9 +11,6 @@ Source: dbuild templates
 
 Volunteer-built media solution that puts you in control — stream to any device from your own server, with no strings attached.
 
-> [!WARNING]
-> **Requires ocijail ≥ 0.6.0 (annotation support).** This image needs the jail permission **allow.mlock**, applied via OCI annotations. FreeBSD **quarterly ships ocijail 0.4.0, which has no annotation support** — the container starts but the permission is silently dropped, so the app can crash or misbehave at runtime. Point your pkg repos at the `latest` branch (ocijail ≥ 0.6.0), then run with the annotation flag below. See the [ocijail guide](https://daemonless.io/guides/ocijail-patch/).
-
 | | |
 |---|---|
 | **Port** | 8096 |
@@ -24,7 +21,8 @@ Volunteer-built media solution that puts you in control — stream to any device
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `latest` / `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Most users — recommended. |
+| `latest` | **FreeBSD Latest**. Jellyfin plus the jellyfin-ffmpeg7 package (not in quarterly). | Most users — recommended. |
+| `pkg` | **FreeBSD Quarterly**. Uses stable, tested packages. | Production stability. |
 | `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 ## Prerequisites
@@ -53,8 +51,11 @@ services:
       - "8096:8096"
     annotations:
       org.freebsd.jail.allow.mlock: "true"
-    restart: unless-stopped
+    # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
+    restart: always
 ```
+
+Save as `compose.yaml`, then run `podman-compose up -d`.
 
 ### AppJail Director
 **.env**:
@@ -117,6 +118,9 @@ OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/jellyfin:${tag}
 SET allow.mlock=1
 ```
+
+Save the files above, then run `appjail-director up`.
+
 **Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
 
 ### Podman CLI
@@ -135,6 +139,8 @@ podman run -d --name jellyfin \
   -v /path/to/movies:/movies # optional \
   ghcr.io/daemonless/jellyfin:latest
 ```
+
+Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
 
@@ -155,7 +161,49 @@ appjail oci run -Pd \
   -o fstab="/path/to/movies /movies <pseudofs>" \ # optional
   ghcr.io/daemonless/jellyfin:latest jellyfin
 ```
+
+Save as `run.sh`, then run `sh run.sh`.
+
 **Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+### Bastille
+
+> [!WARNING]
+> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
+
+```yaml
+services:
+  jellyfin:
+    name: jellyfin
+    image: "ghcr.io/daemonless/jellyfin:latest"
+    network:
+      - mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
+    volumes:
+      - "/path/to/containers/jellyfin:/config"
+      - "/path/to/containers/jellyfin/cache:/cache"
+      - "/path/to/tv:/tv"
+      - "/path/to/movies:/movies"
+```
+
+Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
+
+```bash
+bastille create -O \
+  --env PUID=1000 \
+  --env PGID=1000 \
+  --env TZ=UTC \
+  --env FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
+  --volume /path/to/containers/jellyfin /config \
+  --volume /path/to/containers/jellyfin/cache /cache \
+  --volume /path/to/tv /tv \
+  --volume /path/to/movies /movies \
+  jellyfin ghcr.io/daemonless/jellyfin:latest inherit
+```
 
 ### Ansible
 
@@ -181,6 +229,8 @@ appjail oci run -Pd \
     annotation:
       org.freebsd.jail.allow.mlock: "true"
 ```
+
+Save as `jellyfin-deploy.yaml`, then run `ansible-playbook jellyfin-deploy.yaml`.
 
 Access at: `http://localhost:8096`
 

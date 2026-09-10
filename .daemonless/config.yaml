@@ -10,11 +10,11 @@ cit:
 
 build:
   variants:
-    - tag: pkg
-      containerfile: Containerfile.pkg
-      aliases: ["latest"]
-      default: true
+    # no quarterly build: jellyfin-ffmpeg7 pkg is latest-only
     - tag: pkg-latest
       containerfile: Containerfile.pkg
       args:
         BASE_VERSION: "15.1-latest"
+      aliases: ["latest", "pkg"]
+      default: true
+      tag_desc: "**FreeBSD Latest**. Jellyfin plus the jellyfin-ffmpeg7 package (not in quarterly)."
