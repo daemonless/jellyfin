@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-10T16:04:27Z",
+  "generated": "2026-09-12T15:23:39Z",
   "image": "jellyfin",
   "tags": {
-    "pkg-latest": {
+    "pkg-latest-amd64": {
       "app_version": "10.11.11_1",
       "arch": "amd64",
-      "generated": "2026-09-10T16:01:04Z",
+      "generated": "2026-09-12T15:20:11Z",
       "packages": {
         "dotnet": [
           {
@@ -831,7 +831,7 @@
               "MIT"
             ],
             "name": "curl",
-            "version": "8.21.0"
+            "version": "8.22.0"
           },
           {
             "licenses": [
@@ -1340,7 +1340,7 @@
               "LGPL20"
             ],
             "name": "librsvg2-rust",
-            "version": "2.62.3_1"
+            "version": "2.62.3_2"
           },
           {
             "licenses": [
