@@ -82,8 +82,9 @@ services:
   jellyfin:
     name: jellyfin
     options:
-      - container: 'boot args:--pull'
+      - container: 'args:--pull'
       - expose: '8096:8096 proto:tcp'
+      - template: !ENV '${PWD}/template.conf'
     oci:
       user: root
       environment:
@@ -114,14 +115,30 @@ volumes:
 
 ARG tag=latest
 
+OPTION container=boot
 OPTION overwrite=force
 OPTION from=ghcr.io/daemonless/jellyfin:${tag}
-SET allow.mlock=1
+```
+
+**template.conf**:
+
+```
+# template.conf
+
+exec.start: "/bin/sh /etc/rc"
+exec.stop: "/bin/sh /etc/rc.shutdown jail"
+mount.devfs
+persist
+allow.mlock
 ```
 
 Save the files above, then run `appjail-director up`.
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Podman CLI
 
@@ -144,12 +161,14 @@ Save as `run.sh`, then run `sh run.sh`.
 
 ### AppJail
 
+
 ```bash
 appjail oci run -Pd \
   -o overwrite=force \
   -o container="args:--pull" \
   -o virtualnet=":<random> default" \
   -o nat \
+  -o template=template.conf \
   -o expose="8096:8096 proto:tcp" \
   -e PUID=1000 \
   -e PGID=1000 \
@@ -162,29 +181,50 @@ appjail oci run -Pd \
   ghcr.io/daemonless/jellyfin:latest jellyfin
 ```
 
-Save as `run.sh`, then run `sh run.sh`.
+**template.conf**:
+```
+# template.conf
 
-**Note**: Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the IPv4 address assigned by the virtual network.
+exec.start: "/bin/sh /etc/rc"
+exec.stop: "/bin/sh /etc/rc.shutdown jail"
+mount.devfs
+persist
+allow.mlock
+```
+
+Save the files above, then run `sh run.sh`.
+
+
+> [!WARNING]
+> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
+>
+> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
 ### Bastille
 
 > [!WARNING]
-> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
 
 ```yaml
 services:
   jellyfin:
+    name: jellyfin
     image: "ghcr.io/daemonless/jellyfin:latest"
-    container_name: jellyfin
-    network_mode: host  # jail shares host networking
+    network:
+      - mode: host
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
       - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
+    volumes:
+      - "/path/to/containers/jellyfin:/config"
+      - "/path/to/containers/jellyfin/cache:/cache"
+      - "/path/to/tv:/tv"
+      - "/path/to/movies:/movies"
 ```
 
-Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
 
 ```bash
 bastille create -O \
@@ -192,7 +232,10 @@ bastille create -O \
   --env PGID=1000 \
   --env TZ=UTC \
   --env FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
-  --data-path /path/to/containers/jellyfin \
+  --volume /path/to/containers/jellyfin /config \
+  --volume /path/to/containers/jellyfin/cache /cache \
+  --volume /path/to/tv /tv \
+  --volume /path/to/movies /movies \
   jellyfin ghcr.io/daemonless/jellyfin:latest inherit
 ```
 
@@ -301,7 +344,7 @@ expose the DRI devices into the jail:
    acceleration to **VAAPI**, device `/dev/dri/renderD128`.
 
 
-**Architectures:** amd64
+**Architectures:** amd64, aarch64
 **User:** `bsd` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.1
 

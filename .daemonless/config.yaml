@@ -9,6 +9,9 @@ cit:
     - org.freebsd.jail.allow.mlock=true
 
 build:
+  architectures:
+    - amd64
+    - aarch64
   variants:
     # no quarterly build: jellyfin-ffmpeg7 pkg is latest-only
     - tag: pkg-latest

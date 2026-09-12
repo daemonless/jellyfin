@@ -1,4 +1,5 @@
-{%- set va_deps = "libva libva-intel-media-driver gmmlib mesa-dri" -%}
+{%- set va_deps = "libva mesa-dri" -%}
+{%- set va_deps_amd64 = "libva-intel-media-driver gmmlib" -%}
 # jellyfin-ffmpeg7 pkg exists only in the latest branch
 ARG BASE_VERSION=15.1-latest
 
@@ -7,6 +8,7 @@ FROM ghcr.io/daemonless/base:${BASE_VERSION}
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
 ARG PACKAGES="${PKG_NAME} jellyfin-ffmpeg7 ffmpeg {{ va_deps }}"
+ARG PACKAGES_AMD64="{{ va_deps_amd64 }}"
 ARG UPSTREAM_URL="https://api.github.com/repos/jellyfin/jellyfin/releases/latest"
 ARG UPSTREAM_JQ=".tag_name"
 {%- if ports %}
@@ -44,8 +46,10 @@ LABEL org.opencontainers.image.title="{{ title }}" \
       io.daemonless.packages="${PACKAGES}"
 
 # Install from FreeBSD packages
-RUN pkg update && \
-    pkg install -y ${PACKAGES} && \
+# libva-intel-media-driver is ONLY_FOR_ARCHS= amd64 i386; gmmlib is its dep.
+RUN if [ "${FREEBSD_ARCH}" = "amd64" ]; then VA_EXTRA="${PACKAGES_AMD64}"; else VA_EXTRA=""; fi && \
+    pkg update && \
+    pkg install -y ${PACKAGES} ${VA_EXTRA} && \
     mkdir -p /app /config /cache /media && \
     pkg info ${PKG_NAME} | sed -n 's/.*Version.*: *//p' > /app/version && \
     pkg clean -ay && \
