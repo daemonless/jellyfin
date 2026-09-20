@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-12T15:23:39Z",
+  "generated": "2026-09-20T23:53:49Z",
   "image": "jellyfin",
   "tags": {
     "pkg-latest-amd64": {
       "app_version": "10.11.11_1",
       "arch": "amd64",
-      "generated": "2026-09-12T15:20:11Z",
+      "generated": "2026-09-20T23:50:55Z",
       "packages": {
         "dotnet": [
           {
@@ -573,6 +573,13 @@
           },
           {
             "licenses": [
+              "BSD-3-Clause"
+            ],
+            "name": "FreeBSD-dhclient",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-fetch",
@@ -694,6 +701,13 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
+            "name": "FreeBSD-resolvconf",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
             "name": "FreeBSD-runtime",
             "version": "15.1p3"
           },
@@ -779,7 +793,7 @@
               "GPLv3+"
             ],
             "name": "bash",
-            "version": "5.3.15"
+            "version": "5.3.20"
           },
           {
             "licenses": [
@@ -808,7 +822,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [
@@ -839,6 +853,13 @@
             ],
             "name": "dav1d",
             "version": "1.5.4"
+          },
+          {
+            "licenses": [
+              "GPLv2"
+            ],
+            "name": "dbus",
+            "version": "1.16.2_4,1"
           },
           {
             "licenses": [
@@ -971,6 +992,14 @@
           },
           {
             "licenses": [
+              "GPLv2+",
+              "LGPL20+"
+            ],
+            "name": "gobject-introspection",
+            "version": "1.86.0,1"
+          },
+          {
+            "licenses": [
               "MPL20",
               "LGPL21",
               "GPLv2"
@@ -1013,6 +1042,14 @@
             ],
             "name": "indexinfo",
             "version": "0.3.1_1"
+          },
+          {
+            "licenses": [
+              "LGPL21",
+              "GPLv2"
+            ],
+            "name": "jackit",
+            "version": "1.9.22_3"
           },
           {
             "licenses": [
@@ -1080,6 +1117,20 @@
             ],
             "name": "lerc",
             "version": "4.2.0"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "libICE",
+            "version": "1.1.2,1"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "libSM",
+            "version": "1.2.6,1"
           },
           {
             "licenses": [
@@ -1170,7 +1221,7 @@
               "LGPL21"
             ],
             "name": "libbluray",
-            "version": "1.5.0,1"
+            "version": "1.5.1,1"
           },
           {
             "licenses": [
@@ -1344,6 +1395,13 @@
           },
           {
             "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "libsamplerate",
+            "version": "0.2.2_1"
+          },
+          {
+            "licenses": [
               "BSD3CLAUSE"
             ],
             "name": "libskiasharp",
@@ -1362,6 +1420,13 @@
             ],
             "name": "libssh2",
             "version": "1.11.1_1,3"
+          },
+          {
+            "licenses": [
+              "BSD3CLAUSE"
+            ],
+            "name": "libsysinfo",
+            "version": "0.0.3_3"
           },
           {
             "licenses": [
@@ -1692,7 +1757,7 @@
               "MIT"
             ],
             "name": "portaudio",
-            "version": "19.6.0_7,1"
+            "version": "19.6.0_8,1"
           },
           {
             "licenses": [
@@ -1700,6 +1765,13 @@
             ],
             "name": "py312-boost-libs",
             "version": "1.91.0"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "py312-dbus",
+            "version": "1.4.0"
           },
           {
             "licenses": [
@@ -1715,6 +1787,35 @@
             ],
             "name": "py312-packaging",
             "version": "26.3"
+          },
+          {
+            "licenses": [
+              "LGPL21",
+              "MPL11"
+            ],
+            "name": "py312-pycairo",
+            "version": "1.29.1"
+          },
+          {
+            "licenses": [
+              "LGPL21"
+            ],
+            "name": "py312-pygobject",
+            "version": "3.58.0"
+          },
+          {
+            "licenses": [
+              "MIT"
+            ],
+            "name": "py312-setuptools",
+            "version": "63.1.0_3"
+          },
+          {
+            "licenses": [
+              "LGPL21"
+            ],
+            "name": "pygobject-common",
+            "version": "3.58.0"
           },
           {
             "licenses": [
@@ -1749,7 +1850,7 @@
               "APACHE20"
             ],
             "name": "shaderc",
-            "version": "2026.3"
+            "version": "2026.4"
           },
           {
             "licenses": [
@@ -1798,7 +1899,7 @@
               "LGPL21"
             ],
             "name": "srt",
-            "version": "1.5.6"
+            "version": "1.5.7_1"
           },
           {
             "licenses": [
@@ -1828,7 +1929,7 @@
               "BSD2CLAUSE+PATENT"
             ],
             "name": "vmaf",
-            "version": "3.2.0"
+            "version": "3.2.1"
           },
           {
             "licenses": [
@@ -1943,6 +2044,11 @@
         "php": [],
         "python": [
           {
+            "name": "PyGObject",
+            "purl": "",
+            "version": "3.58.0"
+          },
+          {
             "name": "example",
             "purl": "",
             "version": "21.12"
@@ -1956,6 +2062,16 @@
             "name": "packaging",
             "purl": "",
             "version": "26.3"
+          },
+          {
+            "name": "pycairo",
+            "purl": "",
+            "version": "1.29.1"
+          },
+          {
+            "name": "setuptools",
+            "purl": "",
+            "version": "63.1.0"
           }
         ],
         "ruby": [],
@@ -1964,15 +2080,15 @@
       "source": "pkg",
       "summary": {
         "dotnet": 101,
-        "freebsd": 190,
+        "freebsd": 204,
         "go": 0,
         "java": 0,
         "node": 11,
         "php": 0,
-        "python": 3,
+        "python": 6,
         "ruby": 0,
         "rust": 0,
-        "total": 305
+        "total": 322
       }
     }
   }
