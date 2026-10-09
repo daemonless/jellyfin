@@ -44,8 +44,8 @@ services:
       - TZ=UTC  # Timezone for the container
       - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg  # Path to the FFmpeg binary. Options: /usr/local/bin/jellyfin-ffmpeg (default) or /usr/local/bin/ffmpeg
     volumes:
-      - "/path/to/containers/jellyfin:/config"
-      - "/path/to/containers/jellyfin/cache:/cache" # optional
+      - "/containers/jellyfin:/config"
+      - "/containers/jellyfin/cache:/cache" # optional
       - "/path/to/tv:/tv" # optional
       - "/path/to/movies:/movies" # optional
     ports:
@@ -100,9 +100,9 @@ services:
       - movies: /movies
 volumes:
   jellyfin:
-    device: '/path/to/containers/jellyfin'
+    device: '/containers/jellyfin'
   jellyfin_cache:
-    device: '/path/to/containers/jellyfin/cache'
+    device: '/containers/jellyfin/cache'
   tv:
     device: 'tv'
   movies:
@@ -141,66 +141,6 @@ Save the files above, then run `appjail-director up`.
 >
 > To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
 
-### Podman CLI
-
-```bash
-podman run -d --name jellyfin \
-  -p 8096:8096 \
-  --annotation 'org.freebsd.jail.allow.mlock=true' \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
-  -v /path/to/containers/jellyfin:/config \
-  -v /path/to/containers/jellyfin/cache:/cache # optional \
-  -v /path/to/tv:/tv # optional \
-  -v /path/to/movies:/movies # optional \
-  ghcr.io/daemonless/jellyfin:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o template=template.conf \
-  -o expose="8096:8096 proto:tcp" \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
-  -o fstab="/path/to/containers/jellyfin /config <pseudofs>" \
-  -o fstab="/path/to/containers/jellyfin/cache /cache <pseudofs>" \ # optional
-  -o fstab="/path/to/tv /tv <pseudofs>" \ # optional
-  -o fstab="/path/to/movies /movies <pseudofs>" \ # optional
-  ghcr.io/daemonless/jellyfin:latest jellyfin
-```
-
-**template.conf**:
-```
-# template.conf
-
-exec.start: "/bin/sh /etc/rc"
-exec.stop: "/bin/sh /etc/rc.shutdown jail"
-mount.devfs
-persist
-allow.mlock
-```
-
-Save the files above, then run `sh run.sh`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
 ### Bastille
 
 > [!WARNING]
@@ -219,53 +159,13 @@ services:
       - TZ=UTC
       - FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg
     volumes:
-      - "/path/to/containers/jellyfin:/config"
-      - "/path/to/containers/jellyfin/cache:/cache"
+      - "/containers/jellyfin:/config"
+      - "/containers/jellyfin/cache:/cache"
       - "/path/to/tv:/tv"
       - "/path/to/movies:/movies"
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=UTC \
-  --env FFMPEG_PATH=/usr/local/bin/jellyfin-ffmpeg \
-  --volume /path/to/containers/jellyfin /config \
-  --volume /path/to/containers/jellyfin/cache /cache \
-  --volume /path/to/tv /tv \
-  --volume /path/to/movies /movies \
-  jellyfin ghcr.io/daemonless/jellyfin:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy jellyfin
-  containers.podman.podman_container:
-    name: jellyfin
-    image: "ghcr.io/daemonless/jellyfin:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
-      FFMPEG_PATH: "/usr/local/bin/jellyfin-ffmpeg"
-    ports:
-      - "8096:8096"
-    volumes:
-      - "/path/to/containers/jellyfin:/config"
-      - "/path/to/containers/jellyfin/cache:/cache" # optional
-      - "/path/to/tv:/tv" # optional
-      - "/path/to/movies:/movies" # optional
-    annotation:
-      org.freebsd.jail.allow.mlock: "true"
-```
-
-Save as `jellyfin-deploy.yaml`, then run `ansible-playbook jellyfin-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 Access at: `http://localhost:8096`
 
