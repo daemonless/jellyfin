@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-14T21:32:48Z",
+  "generated": "2026-10-21T19:31:54Z",
   "image": "jellyfin",
   "tags": {
     "pkg-latest-aarch64": {
       "app_version": "10.11.11_1",
       "arch": "aarch64",
-      "generated": "2026-10-14T21:31:27Z",
+      "generated": "2026-10-21T19:30:52Z",
       "packages": {
         "dotnet": [
           {
@@ -702,7 +702,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -751,7 +751,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -815,7 +815,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.130"
+            "version": "3.131"
           },
           {
             "licenses": [
@@ -882,7 +882,7 @@
               "FRAUNHOFER_FDK_AAC"
             ],
             "name": "fdk-aac",
-            "version": "2.0.3"
+            "version": "3.0.0"
           },
           {
             "licenses": [
@@ -1377,7 +1377,7 @@
               "LGPL20"
             ],
             "name": "librsvg2-rust",
-            "version": "2.62.3_2"
+            "version": "2.62.3_3"
           },
           {
             "licenses": [
@@ -1800,7 +1800,7 @@
               "PSFL"
             ],
             "name": "python312",
-            "version": "3.12.14_1"
+            "version": "3.12.15"
           },
           {
             "licenses": [
@@ -1962,63 +1962,7 @@
         ],
         "go": [],
         "java": [],
-        "node": [
-          {
-            "name": "@jupyterlite/app",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-consoles",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-edit",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-lab",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-notebooks",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-repl",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/app-tree",
-            "purl": "",
-            "version": "0.5.1"
-          },
-          {
-            "name": "@jupyterlite/pyodide-kernel-extension",
-            "purl": "",
-            "version": "0.5.2"
-          },
-          {
-            "name": "MathJax-grunt-cleaner",
-            "purl": "",
-            "version": "0.1.0"
-          },
-          {
-            "name": "jupyterlab-jupytext",
-            "purl": "",
-            "version": "1.4.5"
-          },
-          {
-            "name": "jupyterlab_pygments",
-            "purl": "",
-            "version": "0.3.0"
-          }
-        ],
+        "node": [],
         "php": [],
         "python": [
           {
@@ -2061,12 +2005,12 @@
         "freebsd": 201,
         "go": 0,
         "java": 0,
-        "node": 11,
+        "node": 0,
         "php": 0,
         "python": 6,
         "ruby": 0,
         "rust": 0,
-        "total": 319
+        "total": 308
       }
     }
   }
