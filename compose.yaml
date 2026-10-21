@@ -87,7 +87,7 @@ services:
     image: ghcr.io/daemonless/jellyfin:latest
     container_name: jellyfin
     restart: unless-stopped
-    
+
     annotations:
       org.freebsd.jail.allow.mlock: "true"
 
