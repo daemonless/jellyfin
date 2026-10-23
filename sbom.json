@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-21T18:33:14Z",
+  "generated": "2026-10-23T07:26:53Z",
   "image": "jellyfin",
   "tags": {
     "pkg-latest-amd64": {
       "app_version": "10.11.11_1",
       "arch": "amd64",
-      "generated": "2026-10-21T18:31:04Z",
+      "generated": "2026-10-23T07:25:07Z",
       "packages": {
         "dotnet": [
           {
@@ -834,14 +834,6 @@
           },
           {
             "licenses": [
-              "MIT",
-              "LGPL21"
-            ],
-            "name": "chromaprint",
-            "version": "1.6.0_1"
-          },
-          {
-            "licenses": [
               "MIT"
             ],
             "name": "curl",
@@ -869,13 +861,6 @@
             ],
             "name": "dejavu",
             "version": "2.37_4"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
           },
           {
             "licenses": [
@@ -1012,7 +997,7 @@
               "MIT"
             ],
             "name": "harfbuzz",
-            "version": "14.5.1"
+            "version": "14.6.0"
           },
           {
             "licenses": [
@@ -1072,7 +1057,7 @@
               "GPLv2+"
             ],
             "name": "jellyfin-ffmpeg7",
-            "version": "7.1.4.3_3"
+            "version": "7.1.4.3_4"
           },
           {
             "licenses": [
@@ -1137,7 +1122,7 @@
               "MIT"
             ],
             "name": "libX11",
-            "version": "1.8.13_1,1"
+            "version": "1.8.14,1"
           },
           {
             "licenses": [
@@ -1193,7 +1178,7 @@
               "MIT"
             ],
             "name": "libXrender",
-            "version": "0.9.12"
+            "version": "0.9.13"
           },
           {
             "licenses": [
@@ -1833,13 +1818,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
               "WTFPL"
             ],
             "name": "sekrit-twc-zimg",
@@ -1858,13 +1836,6 @@
             ],
             "name": "shared-mime-info",
             "version": "2.4_2"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
           },
           {
             "licenses": [
@@ -2024,7 +1995,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 101,
-        "freebsd": 204,
+        "freebsd": 200,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -2032,7 +2003,7 @@
         "python": 6,
         "ruby": 0,
         "rust": 0,
-        "total": 311
+        "total": 307
       }
     }
   }
