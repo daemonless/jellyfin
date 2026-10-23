@@ -3,7 +3,7 @@
 # jellyfin-ffmpeg7 pkg exists only in the latest branch
 ARG BASE_VERSION=15.1-latest
 
-FROM ghcr.io/daemonless/base:${BASE_VERSION}
+FROM ghcr.io/daemonless/base-exec:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME=jellyfin
@@ -63,7 +63,9 @@ RUN if [ "${FREEBSD_ARCH}" = "amd64" ]; then VA_EXTRA="${PACKAGES_AMD64}"; else 
 
 # Copy service definition and init scripts
 COPY root/ /
-RUN chmod +x /etc/services.d/jellyfin/run /etc/cont-init.d/* 2>/dev/null || true
+RUN chmod +x /daemonless/libexec/jellyfin /daemonless/init.d/*
+
+CMD ["/daemonless/libexec/jellyfin"]
 
 # --- Expose (Injected by Generator) ---
 {%- if ports %}

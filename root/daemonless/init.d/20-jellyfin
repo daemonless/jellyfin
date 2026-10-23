@@ -1,0 +1,6 @@
+#!/bin/sh
+# /cache is an image volume owned by the build-time bsd (1000): follow a
+# PUID change, or jellyfin can't write its cache marker and exits.
+if [ "$(id -u)" = 0 ] && [ "$(stat -f %u /cache)" != "$(id -u bsd)" ]; then
+    chown -R bsd:bsd /cache
+fi

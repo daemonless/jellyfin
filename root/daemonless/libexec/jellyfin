@@ -3,7 +3,7 @@
 # Use jellyfin-ffmpeg by default if not specified
 FFMPEG_PATH="${FFMPEG_PATH:-/usr/local/bin/jellyfin-ffmpeg}"
 
-exec s6-setuidgid bsd /usr/local/jellyfin/jellyfin \
+exec /usr/local/jellyfin/jellyfin \
     --datadir /config \
     --cachedir /cache \
     --ffmpeg "${FFMPEG_PATH}" \
