@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-21T19:31:54Z",
+  "generated": "2026-10-23T07:36:23Z",
   "image": "jellyfin",
   "tags": {
     "pkg-latest-aarch64": {
       "app_version": "10.11.11_1",
       "arch": "aarch64",
-      "generated": "2026-10-21T19:30:52Z",
+      "generated": "2026-10-23T07:35:30Z",
       "packages": {
         "dotnet": [
           {
@@ -862,13 +862,6 @@
             ],
             "name": "dejavu",
             "version": "2.37_4"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
           },
           {
             "licenses": [
@@ -1811,13 +1804,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
               "WTFPL"
             ],
             "name": "sekrit-twc-zimg",
@@ -1836,13 +1822,6 @@
             ],
             "name": "shared-mime-info",
             "version": "2.4_2"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
           },
           {
             "licenses": [
@@ -2002,7 +1981,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 101,
-        "freebsd": 201,
+        "freebsd": 198,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -2010,7 +1989,7 @@
         "python": 6,
         "ruby": 0,
         "rust": 0,
-        "total": 308
+        "total": 305
       }
     }
   }
