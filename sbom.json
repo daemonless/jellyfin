@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-23T07:26:53Z",
+  "generated": "2026-11-03T12:08:34Z",
   "image": "jellyfin",
   "tags": {
     "pkg-latest-amd64": {
       "app_version": "10.11.11_1",
       "arch": "amd64",
-      "generated": "2026-10-23T07:25:07Z",
+      "generated": "2026-11-03T12:06:58Z",
       "packages": {
         "dotnet": [
           {
@@ -709,7 +709,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p5"
+            "version": "15.1p6"
           },
           {
             "licenses": [
@@ -786,7 +786,7 @@
               "BSD2CLAUSE"
             ],
             "name": "aom",
-            "version": "3.15.1"
+            "version": "3.15.2"
           },
           {
             "licenses": [
@@ -815,14 +815,14 @@
               "MIT"
             ],
             "name": "brotli",
-            "version": "1.2.0,1"
+            "version": "1.2.1,1"
           },
           {
             "licenses": [
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.131"
+            "version": "3.132"
           },
           {
             "licenses": [
@@ -830,21 +830,21 @@
               "MPL11"
             ],
             "name": "cairo",
-            "version": "1.18.2,3"
+            "version": "1.18.6,3"
           },
           {
             "licenses": [
               "MIT"
             ],
             "name": "curl",
-            "version": "8.22.0"
+            "version": "8.23.0"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "dav1d",
-            "version": "1.5.4"
+            "version": "1.5.4_1"
           },
           {
             "licenses": [
@@ -882,7 +882,7 @@
               "LGPL3+"
             ],
             "name": "ffmpeg",
-            "version": "9.0.2_2,1"
+            "version": "9.0.2_3,1"
           },
           {
             "licenses": [
@@ -914,7 +914,7 @@
               "LGPL21"
             ],
             "name": "fribidi",
-            "version": "1.0.17"
+            "version": "1.0.18"
           },
           {
             "licenses": [
@@ -997,7 +997,7 @@
               "MIT"
             ],
             "name": "harfbuzz",
-            "version": "14.6.0"
+            "version": "15.0.0"
           },
           {
             "licenses": [
@@ -1057,7 +1057,7 @@
               "GPLv2+"
             ],
             "name": "jellyfin-ffmpeg7",
-            "version": "7.1.4.3_4"
+            "version": "7.1.4.3_5"
           },
           {
             "licenses": [
@@ -1080,7 +1080,7 @@
               "MIT"
             ],
             "name": "krb5",
-            "version": "1.22.2_3"
+            "version": "1.22.2_4"
           },
           {
             "licenses": [
@@ -1362,7 +1362,7 @@
               "LGPL21+"
             ],
             "name": "libplacebo",
-            "version": "7.360.1"
+            "version": "7.387.0"
           },
           {
             "licenses": [
@@ -1376,7 +1376,7 @@
               "LGPL20"
             ],
             "name": "librsvg2-rust",
-            "version": "2.62.3_3"
+            "version": "2.63.4"
           },
           {
             "licenses": [
@@ -1699,7 +1699,7 @@
               "LGPL21+"
             ],
             "name": "pango",
-            "version": "1.57.1"
+            "version": "1.58.2"
           },
           {
             "licenses": [
@@ -1863,7 +1863,7 @@
               "PD"
             ],
             "name": "sqlite3",
-            "version": "3.53.4,1"
+            "version": "3.54.1,1"
           },
           {
             "licenses": [
